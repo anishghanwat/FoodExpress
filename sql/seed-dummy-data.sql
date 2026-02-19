@@ -23,8 +23,8 @@ VALUES
 
 USE restaurant_db;
 
--- Get owner ID (should be 2 since admin is 1)
-SET @owner_id = 2;
+-- Get owner ID dynamically
+SET @owner_id = (SELECT id FROM user_db.users WHERE email = 'owner@gmail.com' LIMIT 1);
 
 INSERT INTO restaurants (name, description, address, phone, email, cuisine, rating, estimated_delivery_time, delivery_fee, is_active, owner_id, image_url, opening_time, closing_time, total_reviews, created_at, updated_at)
 VALUES 
