@@ -1,0 +1,57 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+docs/
+README.md
+LICENSE
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# Build artifacts
+target/
+build/
+dist/
+*.jar
+*.war
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.log
+
+# Test
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Docker
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# Scripts
+scripts/
+sql/
+
+# Temporary
+*.tmp
+*.temp
+.cache/
