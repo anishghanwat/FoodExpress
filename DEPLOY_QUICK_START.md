@@ -17,7 +17,7 @@ docker-compose --version
 ## Step 2: Get the Code 📥
 
 ```bash
-git clone https://github.com/Unmesh0070/FoodExpress.git
+git clone <git_url>
 cd FoodExpress
 ```
 
