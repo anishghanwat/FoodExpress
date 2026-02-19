@@ -37,10 +37,10 @@ spring:
 
   # Mail Configuration
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: Fooddelapp@gmail.com
-    password: ebxr vrbo rzkg hznp
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -52,8 +52,8 @@ spring:
 
 app:
   mail:
-    from: Fooddelapp@gmail.com
-    from-name: FoodExpress
+    from: ${MAIL_FROM:${MAIL_USERNAME}}
+    from-name: ${MAIL_FROM_NAME:FoodExpress}
 
 eureka:
   client:
