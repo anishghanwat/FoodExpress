@@ -167,6 +167,51 @@ VALUES
 (10, 'French Onion Soup', 'Classic soup with caramelized onions', 8.99, 'Appetizer', 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400', true, true, NOW(), NOW()),
 (10, 'Crème Brûlée', 'Vanilla custard with caramelized sugar', 7.99, 'Dessert', 'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400', true, true, NOW(), NOW());
 
+-- Seoul Kitchen Menu
+INSERT INTO menu_items (restaurant_id, name, description, price, category, image_url, is_available, is_vegetarian, created_at, updated_at)
+VALUES 
+(11, 'Bulgogi', 'Marinated beef BBQ with vegetables', 16.99, 'Main Course', 'https://images.unsplash.com/photo-1580554530778-ca36943938b2?w=400', true, false, NOW(), NOW()),
+(11, 'Bibimbap', 'Mixed rice bowl with vegetables and egg', 13.99, 'Main Course', 'https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=400', true, true, NOW(), NOW()),
+(11, 'Korean Fried Chicken', 'Crispy chicken with spicy sauce', 14.99, 'Main Course', 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400', true, false, NOW(), NOW()),
+(11, 'Kimchi Pancake', 'Savory pancake with fermented vegetables', 8.99, 'Appetizer', 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400', true, true, NOW(), NOW()),
+(11, 'Bingsu', 'Shaved ice dessert with sweet toppings', 7.99, 'Dessert', 'https://images.unsplash.com/photo-1567327684231-bd3b6c8c5e3f?w=400', true, true, NOW(), NOW());
+
+-- Pho Paradise Menu
+INSERT INTO menu_items (restaurant_id, name, description, price, category, image_url, is_available, is_vegetarian, created_at, updated_at)
+VALUES 
+(12, 'Pho Bo', 'Traditional beef noodle soup', 12.99, 'Main Course', 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400', true, false, NOW(), NOW()),
+(12, 'Banh Mi', 'Vietnamese sandwich with pork and pickles', 9.99, 'Main Course', 'https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=400', true, false, NOW(), NOW()),
+(12, 'Bun Cha', 'Grilled pork with vermicelli noodles', 13.99, 'Main Course', 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400', true, false, NOW(), NOW()),
+(12, 'Fresh Spring Rolls', 'Rice paper rolls with shrimp and herbs', 7.99, 'Appetizer', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400', true, false, NOW(), NOW()),
+(12, 'Che Ba Mau', 'Three-color dessert with beans and coconut', 5.99, 'Dessert', 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400', true, true, NOW(), NOW());
+
+-- Tapas Barcelona Menu
+INSERT INTO menu_items (restaurant_id, name, description, price, category, image_url, is_available, is_vegetarian, created_at, updated_at)
+VALUES 
+(13, 'Paella Valenciana', 'Traditional Spanish rice with seafood', 19.99, 'Main Course', 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=400', true, false, NOW(), NOW()),
+(13, 'Patatas Bravas', 'Crispy potatoes with spicy tomato sauce', 8.99, 'Appetizer', 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400', true, true, NOW(), NOW()),
+(13, 'Gambas al Ajillo', 'Garlic shrimp in olive oil', 15.99, 'Main Course', 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400', true, false, NOW(), NOW()),
+(13, 'Jamón Ibérico', 'Premium cured ham with bread', 16.99, 'Appetizer', 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400', true, false, NOW(), NOW()),
+(13, 'Churros con Chocolate', 'Fried dough with hot chocolate', 6.99, 'Dessert', 'https://images.unsplash.com/photo-1543257580-7269da773bf5?w=400', true, true, NOW(), NOW());
+
+-- Rio Grill Menu
+INSERT INTO menu_items (restaurant_id, name, description, price, category, image_url, is_available, is_vegetarian, created_at, updated_at)
+VALUES 
+(14, 'Picanha Steak', 'Brazilian sirloin cap with chimichurri', 24.99, 'Main Course', 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400', true, false, NOW(), NOW()),
+(14, 'Feijoada', 'Black bean stew with pork and sausage', 17.99, 'Main Course', 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400', true, false, NOW(), NOW()),
+(14, 'Moqueca', 'Brazilian fish stew with coconut milk', 18.99, 'Main Course', 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400', true, false, NOW(), NOW()),
+(14, 'Pão de Queijo', 'Brazilian cheese bread', 6.99, 'Appetizer', 'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400', true, true, NOW(), NOW()),
+(14, 'Brigadeiro', 'Chocolate truffle dessert', 5.99, 'Dessert', 'https://images.unsplash.com/photo-1606312619070-d48b4cda8bf6?w=400', true, true, NOW(), NOW());
+
+-- Island Spice Menu
+INSERT INTO menu_items (restaurant_id, name, description, price, category, image_url, is_available, is_vegetarian, created_at, updated_at)
+VALUES 
+(15, 'Jerk Chicken', 'Spicy grilled chicken with Caribbean spices', 14.99, 'Main Course', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400', true, false, NOW(), NOW()),
+(15, 'Curry Goat', 'Tender goat meat in curry sauce', 16.99, 'Main Course', 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400', true, false, NOW(), NOW()),
+(15, 'Ackee and Saltfish', 'Jamaican national dish with vegetables', 15.99, 'Main Course', 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400', true, false, NOW(), NOW()),
+(15, 'Plantain Chips', 'Crispy fried plantains with dipping sauce', 6.99, 'Appetizer', 'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=400', true, true, NOW(), NOW()),
+(15, 'Rum Cake', 'Moist cake soaked in Caribbean rum', 7.99, 'Dessert', 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400', true, true, NOW(), NOW());
+
 -- ============================================
 -- SUMMARY
 -- ============================================
