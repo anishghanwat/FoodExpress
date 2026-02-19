@@ -11,10 +11,22 @@ export function AdminCampaigns() {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newCampaign, setNewCampaign] = useState({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS', templateId: '' });
+  const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
     loadCampaigns();
+    loadTemplates();
   }, []);
+
+  const loadTemplates = async () => {
+    try {
+      const data = await adminAPI.getTemplates();
+      setTemplates(data);
+    } catch (error) {
+      console.error('Error loading templates:', error);
+    }
+  };
 
   const loadCampaigns = async () => {
     try {
@@ -93,15 +105,15 @@ export function AdminCampaigns() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AdminNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Campaign Management</h1>
-              <p className="text-white/60">Create and manage marketing campaigns</p>
+              <h1 className="text-3xl font-bold text-foreground mb-2">Campaign Management</h1>
+              <p className="text-muted-foreground">Create and manage marketing campaigns</p>
             </div>
             <Button className="gap-2" onClick={() => setShowCreateModal(true)}>
               <Plus size={18} />
@@ -118,30 +130,30 @@ export function AdminCampaigns() {
                 </div>
               ) : campaigns.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-white/60 mb-4">No campaigns found</p>
+                  <p className="text-muted-foreground mb-4">No campaigns found</p>
                   <Button onClick={() => setShowCreateModal(true)}>Create First Campaign</Button>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-white/10">
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Name</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Type</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Segment</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Status</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Sent</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-white/60">Open Rate</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-white/60">Actions</th>
+                      <tr className="border-b border-border">
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Name</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Type</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Segment</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Status</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Sent</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Open Rate</th>
+                        <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {campaigns.map((campaign) => (
-                        <tr key={campaign.id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                        <tr key={campaign.id} className="border-b border-border hover:bg-muted/50 transition-colors">
                           <td className="py-4 px-4">
                             <div>
-                              <p className="font-medium text-white">{campaign.name}</p>
-                              <p className="text-sm text-white/60">
+                              <p className="font-medium text-foreground">{campaign.name}</p>
+                              <p className="text-sm text-muted-foreground">
                                 Created {formatDate(campaign.createdAt)}
                               </p>
                             </div>
@@ -151,7 +163,7 @@ export function AdminCampaigns() {
                               {campaign.type}
                             </Badge>
                           </td>
-                          <td className="py-4 px-4 text-white/60">
+                          <td className="py-4 px-4 text-muted-foreground">
                             {campaign.segment.replace(/_/g, ' ')}
                           </td>
                           <td className="py-4 px-4">
@@ -169,7 +181,7 @@ export function AdminCampaigns() {
                             <div className="flex justify-end gap-2">
                               <button
                                 onClick={() => toast.info('Edit feature coming soon')}
-                                className="p-2 text-white/40 hover:text-[#FF6B35] hover:bg-white/10 rounded-lg transition-colors"
+                                className="p-2 text-muted-foreground hover:text-[#FF6B35] hover:bg-muted rounded-lg transition-colors"
                                 title="Edit"
                               >
                                 <Edit size={18} />
@@ -177,7 +189,7 @@ export function AdminCampaigns() {
                               {campaign.status === 'SENT' && (
                                 <button
                                   onClick={() => handleViewAnalytics(campaign.id)}
-                                  className="p-2 text-white/40 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
+                                  className="p-2 text-muted-foreground hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
                                   title="View Analytics"
                                 >
                                   <BarChart3 size={18} />
@@ -186,7 +198,7 @@ export function AdminCampaigns() {
                               {campaign.status === 'DRAFT' && (
                                 <button
                                   onClick={() => handleSendCampaign(campaign.id)}
-                                  className="p-2 text-white/40 hover:text-green-400 hover:bg-green-500/10 rounded-lg transition-colors"
+                                  className="p-2 text-muted-foreground hover:text-green-400 hover:bg-green-500/10 rounded-lg transition-colors"
                                   title="Send Campaign"
                                 >
                                   <Send size={18} />
@@ -194,7 +206,7 @@ export function AdminCampaigns() {
                               )}
                               <button
                                 onClick={() => handleDeleteCampaign(campaign.id)}
-                                className="p-2 text-white/40 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                className="p-2 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                                 title="Delete"
                               >
                                 <Trash2 size={18} />
@@ -213,42 +225,77 @@ export function AdminCampaigns() {
           {/* Create Campaign Modal - Placeholder */}
           {showCreateModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowCreateModal(false)}>
-              <div className="bg-[#1a1a1a] border border-white/10 rounded-lg p-8 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
-                <h2 className="text-2xl font-bold text-white mb-6">Create New Campaign</h2>
+              <div className="bg-card border border-border rounded-lg p-8 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
+                <h2 className="text-2xl font-bold text-foreground mb-6">Create New Campaign</h2>
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Campaign Name</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Campaign Name</label>
                     <input
                       type="text"
                       placeholder="Enter campaign name"
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-white/20"
+                      value={newCampaign.name}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, name: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Type</label>
-                    <select className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
-                      <option className="bg-[#1a1a1a]" value="PROMOTIONAL">Promotional</option>
-                      <option className="bg-[#1a1a1a]" value="ANNOUNCEMENT">Announcement</option>
-                      <option className="bg-[#1a1a1a]" value="LOYALTY">Loyalty</option>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Type</label>
+                    <select
+                      value={newCampaign.type}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, type: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
+                      <option className="bg-card" value="PROMOTIONAL">Promotional</option>
+                      <option className="bg-card" value="ANNOUNCEMENT">Announcement</option>
+                      <option className="bg-card" value="LOYALTY">Loyalty</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Target Segment</label>
-                    <select className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
-                      <option className="bg-[#1a1a1a]" value="ALL_CUSTOMERS">All Customers</option>
-                      <option className="bg-[#1a1a1a]" value="ACTIVE_CUSTOMERS">Active Customers</option>
-                      <option className="bg-[#1a1a1a]" value="PREMIUM_CUSTOMERS">Premium Customers</option>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Target Segment</label>
+                    <select
+                      value={newCampaign.segment}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, segment: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
+                      <option className="bg-card" value="ALL_CUSTOMERS">All Customers</option>
+                      <option className="bg-card" value="ACTIVE_CUSTOMERS">Active Customers</option>
+                      <option className="bg-card" value="PREMIUM_CUSTOMERS">Premium Customers</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Notification Template</label>
+                    <select
+                      value={newCampaign.templateId}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, templateId: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
+                      <option className="bg-card" value="">None (Use default)</option>
+                      {templates.map(template => (
+                        <option key={template.id} className="bg-card" value={template.id}>
+                          {template.name} ({template.type})
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
 
                 <div className="flex gap-3">
-                  <Button onClick={() => {
-                    toast.success('Campaign created as draft');
-                    setShowCreateModal(false);
+                  <Button onClick={async () => {
+                    if (!newCampaign.name.trim()) { toast.error('Please enter a campaign name'); return; }
+                    try {
+                      await adminAPI.createCampaign(newCampaign);
+                      toast.success('Campaign created as draft');
+                      setNewCampaign({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS', templateId: '' });
+                      setShowCreateModal(false);
+                      loadCampaigns();
+                    } catch (error) {
+                      console.error('Error creating campaign:', error);
+                      toast.error('Failed to create campaign');
+                    }
                   }} className="flex-1">
                     Create Campaign
                   </Button>

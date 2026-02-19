@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Clock, MapPin, ShoppingBag, Eye, RotateCcw } from 'lucide-react';
 import { Card } from '../components/Card';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
@@ -91,23 +92,23 @@ export function OrderHistory() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
               onClick={() => navigate('/restaurants')}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
             >
               <ArrowLeft size={18} />
               Back
             </button>
-            <h1 className="text-lg font-bold text-white">My Orders</h1>
-            <div className="w-20"></div>
+            <h1 className="text-lg font-bold text-foreground">My Orders</h1>
+            <div className="w-20 flex justify-end"><ThemeToggle /></div>
           </div>
         </div>
-      </div>
+      </nav>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
@@ -119,9 +120,9 @@ export function OrderHistory() {
         ) : orders.length === 0 ? (
           <Card>
             <div className="p-12 text-center">
-              <ShoppingBag size={56} className="mx-auto mb-4 text-white/20" />
-              <h2 className="text-xl font-bold text-white mb-2">No orders yet</h2>
-              <p className="text-white/40 mb-6">Start exploring restaurants and place your first order!</p>
+              <ShoppingBag size={56} className="mx-auto mb-4 text-muted-foreground/50" />
+              <h2 className="text-xl font-bold text-foreground mb-2">No orders yet</h2>
+              <p className="text-muted-foreground mb-6">Start exploring restaurants and place your first order!</p>
               <Link to="/restaurants">
                 <Button>Browse Restaurants</Button>
               </Link>
@@ -135,12 +136,12 @@ export function OrderHistory() {
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-base font-bold text-white">
+                        <h3 className="text-base font-bold text-foreground">
                           {order.restaurantName || `Restaurant #${order.restaurantId}`}
                         </h3>
                         {getStatusBadge(order.status)}
                       </div>
-                      <div className="space-y-1 text-sm text-white/40">
+                      <div className="space-y-1 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                           <Clock size={14} />
                           <span>{formatDate(order.createdAt)}</span>
@@ -153,19 +154,19 @@ export function OrderHistory() {
                     </div>
 
                     <div className="text-right">
-                      <p className="text-xs text-white/30 mb-1">Order #{order.id}</p>
-                      <p className="text-xl font-bold text-[#FF6B35]">{formatCurrency(order.totalAmount)}</p>
+                      <p className="text-xs text-muted-foreground mb-1">Order #{order.id}</p>
+                      <p className="text-xl font-bold text-primary">{formatCurrency(order.totalAmount)}</p>
                     </div>
                   </div>
 
                   {/* Order Items */}
-                  <div className="mb-4 pb-4 border-b border-white/10">
-                    <p className="text-xs text-white/40 mb-2">
+                  <div className="mb-4 pb-4 border-b border-border">
+                    <p className="text-xs text-muted-foreground mb-2">
                       {order.items.length} item{order.items.length > 1 ? 's' : ''}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {order.items.map((item, idx) => (
-                        <span key={idx} className="inline-flex items-center px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-white/60">
+                        <span key={idx} className="inline-flex items-center px-2 py-1 bg-muted/50 border border-border rounded text-xs text-muted-foreground">
                           {item.quantity}x {item.itemName}
                         </span>
                       ))}

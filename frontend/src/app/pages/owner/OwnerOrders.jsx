@@ -136,31 +136,31 @@ export function OwnerOrders() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-[#6B7280]">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <OwnerNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Restaurant Selector */}
         {restaurants.length > 1 && (
           <div className="mb-6">
-            <label className="block text-sm font-medium text-white/60 mb-2">Select Restaurant</label>
+            <label className="block text-sm font-medium text-muted-foreground mb-2">Select Restaurant</label>
             <select
               value={selectedRestaurant?.id || ''}
               onChange={(e) => {
                 const restaurant = restaurants.find(r => r.id === parseInt(e.target.value));
                 setSelectedRestaurant(restaurant);
               }}
-              className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+              className="px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             >
               {restaurants.map((restaurant) => (
-                <option className="bg-[#1a1a1a]" key={restaurant.id} value={restaurant.id}>
+                <option className="bg-card" key={restaurant.id} value={restaurant.id}>
                   {restaurant.name}
                 </option>
               ))}
@@ -170,7 +170,7 @@ export function OwnerOrders() {
 
         {/* Auto-refresh indicator */}
         <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-2 text-sm text-white/60">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <RefreshCw className="w-4 h-4" />
             <span>Last updated: {lastRefresh.toLocaleTimeString()}</span>
             <span className="text-[#10B981]">(Auto-refresh every 30s)</span>
@@ -197,13 +197,13 @@ export function OwnerOrders() {
                 onClick={() => setSelectedStatus(status)}
                 className={`px-6 py-3 rounded-lg font-medium whitespace-nowrap transition ${selectedStatus === status
                   ? 'bg-[#FF6B35] text-white shadow-lg'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10'
+                  : 'bg-muted/50 text-muted-foreground hover:bg-muted'
                   }`}
               >
                 {status}
                 <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${selectedStatus === status
                   ? 'bg-white/20'
-                  : 'bg-white/5'
+                  : 'bg-muted/50'
                   }`}>
                   {count}
                 </span>
@@ -216,7 +216,7 @@ export function OwnerOrders() {
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-white/5 border-b border-white/10">
+              <thead className="bg-muted/50 border-b border-border">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-[#6B7280] uppercase tracking-wider">
                     Order ID
@@ -243,42 +243,42 @@ export function OwnerOrders() {
               </thead>
               <tbody className="bg-transparent divide-y divide-white/10">
                 {filteredOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-white/5 transition-colors">
+                  <tr key={order.id} className="hover:bg-muted/50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="font-medium text-white">#{order.id}</span>
+                      <span className="font-medium text-foreground">#{order.id}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <p className="font-medium text-white">Customer #{order.userId}</p>
+                        <p className="font-medium text-foreground">Customer #{order.userId}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div>
-                        <p className="text-sm text-white/60">{order.items?.length || 0} items</p>
-                        <p className="text-xs text-white/40 max-w-xs truncate">
+                        <p className="text-sm text-muted-foreground">{order.items?.length || 0} items</p>
+                        <p className="text-xs text-muted-foreground max-w-xs truncate">
                           {order.items?.map(item => `${item.itemName} x${item.quantity}`).join(', ')}
                         </p>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="font-medium text-white">{formatCurrency(order.totalAmount)}</span>
+                      <span className="font-medium text-foreground">{formatCurrency(order.totalAmount)}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <Badge variant={getStatusBadgeVariant(order.status)}>
                         {formatStatusDisplay(order.status)}
                       </Badge>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                       {getTimeSince(new Date(order.createdAt))}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <select
                         value={order.status}
                         onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                        className="px-3 py-1.5 text-sm bg-white/5 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                        className="px-3 py-1.5 text-sm bg-input border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                       >
                         {getStatusOptions(order.status).map((status) => (
-                          <option className="bg-[#1a1a1a]" key={status} value={status}>
+                          <option className="bg-card" key={status} value={status}>
                             {formatStatusDisplay(status)}
                           </option>
                         ))}
@@ -294,7 +294,7 @@ export function OwnerOrders() {
           {filteredOrders.length === 0 && (
             <div className="p-12 text-center">
               <div className="max-w-md mx-auto">
-                <p className="text-white/60">No orders found for this status</p>
+                <p className="text-muted-foreground">No orders found for this status</p>
               </div>
             </div>
           )}

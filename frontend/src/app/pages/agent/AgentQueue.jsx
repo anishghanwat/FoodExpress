@@ -51,30 +51,30 @@ export function AgentQueue() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f]">
+      <div className="min-h-screen bg-background">
         <AgentNav />
         <div className="flex items-center justify-center h-96">
-          <div className="text-white/60">Loading...</div>
+          <div className="text-muted-foreground">Loading...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AgentNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Available Deliveries</h1>
-          <p className="text-white/60">Accept orders ready for pickup</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Available Deliveries</h1>
+          <p className="text-muted-foreground">Accept orders ready for pickup</p>
         </div>
 
         {availableOrders.length === 0 ? (
           <Card className="p-12 text-center">
-            <Package className="w-16 h-16 text-white/20 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No Orders Available</h3>
-            <p className="text-white/60">Check back soon for new delivery opportunities</p>
+            <Package className="w-16 h-16 text-muted-foreground/40 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-foreground mb-2">No Orders Available</h3>
+            <p className="text-muted-foreground">Check back soon for new delivery opportunities</p>
           </Card>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -82,12 +82,12 @@ export function AgentQueue() {
               <Card key={delivery.id} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-1">Order #{delivery.orderId}</h3>
+                    <h3 className="text-lg font-bold text-foreground mb-1">Order #{delivery.orderId}</h3>
                     <Badge variant="success">Ready for Pickup</Badge>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-bold text-[#FF6B35]">{formatCurrency(delivery.orderAmount || 0)}</p>
-                    <p className="text-sm text-white/60">Earn: {formatCurrency(delivery.deliveryFee || 2.99)}</p>
+                    <p className="text-sm text-muted-foreground">Earn: {formatCurrency(delivery.deliveryFee || 2.99)}</p>
                   </div>
                 </div>
 
@@ -95,27 +95,27 @@ export function AgentQueue() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-white">Pickup</p>
-                      <p className="text-sm text-white/60">{delivery.pickupAddress}</p>
+                      <p className="text-sm font-medium text-foreground">Pickup</p>
+                      <p className="text-sm text-muted-foreground">{delivery.pickupAddress}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-white">Delivery</p>
-                      <p className="text-sm text-white/60">{delivery.deliveryAddress}</p>
+                      <p className="text-sm font-medium text-foreground">Delivery</p>
+                      <p className="text-sm text-muted-foreground">{delivery.deliveryAddress}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-white/40" />
-                    <p className="text-sm text-white/60">Ready {getTimeSince(delivery.createdAt)}</p>
+                    <Clock className="w-5 h-5 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">Ready {getTimeSince(delivery.createdAt)}</p>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Package className="w-5 h-5 text-white/40" />
-                    <p className="text-sm text-white/60">Delivery #{delivery.id}</p>
+                    <Package className="w-5 h-5 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">Delivery #{delivery.id}</p>
                   </div>
                 </div>
 

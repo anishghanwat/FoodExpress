@@ -103,58 +103,58 @@ export function AgentEarnings() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f]">
+      <div className="min-h-screen bg-background">
         <AgentNav />
         <div className="flex items-center justify-center h-96">
-          <div className="text-white/60">Loading...</div>
+          <div className="text-muted-foreground">Loading...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AgentNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Earnings</h1>
-          <p className="text-white/60">Track your delivery earnings</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Earnings</h1>
+          <p className="text-muted-foreground">Track your delivery earnings</p>
         </div>
 
         {/* Main Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card className="p-6 bg-gradient-to-br from-[#10B981] to-[#059669]">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-white/80 font-medium">Total Earnings</p>
-              <IndianRupee className="w-8 h-8 text-white/80" />
+              <p className="text-sm text-foreground/80 font-medium">Total Earnings</p>
+              <IndianRupee className="w-8 h-8 text-foreground/80" />
             </div>
-            <p className="text-3xl font-bold text-white">{formatCurrency(stats.total)}</p>
-            <p className="text-xs text-white/70 mt-1">{stats.totalDeliveries} deliveries</p>
+            <p className="text-3xl font-bold text-foreground">{formatCurrency(stats.total)}</p>
+            <p className="text-xs text-foreground/70 mt-1">{stats.totalDeliveries} deliveries</p>
           </Card>
 
-          <Card className="p-6 bg-white/5">
+          <Card className="p-6 bg-muted/50">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-white/60 font-medium">Today</p>
+              <p className="text-sm text-muted-foreground font-medium">Today</p>
               <Calendar className="w-6 h-6 text-blue-400" />
             </div>
-            <p className="text-2xl font-bold text-white">{formatCurrency(stats.today)}</p>
+            <p className="text-2xl font-bold text-foreground">{formatCurrency(stats.today)}</p>
           </Card>
 
-          <Card className="p-6 bg-white/5">
+          <Card className="p-6 bg-muted/50">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-white/60 font-medium">This Week</p>
+              <p className="text-sm text-muted-foreground font-medium">This Week</p>
               <TrendingUp className="w-6 h-6 text-emerald-400" />
             </div>
-            <p className="text-2xl font-bold text-white">{formatCurrency(stats.week)}</p>
+            <p className="text-2xl font-bold text-foreground">{formatCurrency(stats.week)}</p>
           </Card>
 
-          <Card className="p-6 bg-white/5">
+          <Card className="p-6 bg-muted/50">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-white/60 font-medium">This Month</p>
+              <p className="text-sm text-muted-foreground font-medium">This Month</p>
               <Package className="w-6 h-6 text-amber-400" />
             </div>
-            <p className="text-2xl font-bold text-white">{formatCurrency(stats.month)}</p>
+            <p className="text-2xl font-bold text-foreground">{formatCurrency(stats.month)}</p>
           </Card>
         </div>
 
@@ -165,8 +165,8 @@ export function AgentEarnings() {
               <TrendingUp className="w-6 h-6 text-blue-400" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">Average per Delivery</h3>
-              <p className="text-sm text-white/60">Your typical earnings</p>
+              <h3 className="text-lg font-bold text-foreground">Average per Delivery</h3>
+              <p className="text-sm text-muted-foreground">Your typical earnings</p>
             </div>
           </div>
           <p className="text-4xl font-bold text-blue-400">{formatCurrency(stats.avgPerDelivery)}</p>
@@ -174,14 +174,14 @@ export function AgentEarnings() {
 
         {/* Earnings Breakdown */}
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-white mb-4">Earnings Breakdown</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4">Earnings Breakdown</h2>
         </div>
 
         {deliveries.length === 0 ? (
           <Card className="p-12 text-center">
-            <IndianRupee className="w-16 h-16 text-white/20 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No Earnings Yet</h3>
-            <p className="text-white/60">Complete deliveries to start earning</p>
+            <IndianRupee className="w-16 h-16 text-muted-foreground/40 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-foreground mb-2">No Earnings Yet</h3>
+            <p className="text-muted-foreground">Complete deliveries to start earning</p>
           </Card>
         ) : (
           <div className="space-y-3">
@@ -196,8 +196,8 @@ export function AgentEarnings() {
                         <Package className="w-6 h-6 text-emerald-400" />
                       </div>
                       <div>
-                        <p className="font-bold text-white">Order #{delivery.orderId}</p>
-                        <div className="flex items-center gap-2 text-sm text-white/60 mt-1">
+                        <p className="font-bold text-foreground">Order #{delivery.orderId}</p>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                           <Clock className="w-4 h-4" />
                           <span>{formatDate(delivery.deliveryTime)}</span>
                         </div>
@@ -205,7 +205,7 @@ export function AgentEarnings() {
                     </div>
                     <div className="text-right">
                       <p className="text-2xl font-bold text-emerald-400">+{formatCurrency(fee)}</p>
-                      <p className="text-xs text-white/60">Delivery Fee</p>
+                      <p className="text-xs text-muted-foreground">Delivery Fee</p>
                     </div>
                   </div>
                 </Card>

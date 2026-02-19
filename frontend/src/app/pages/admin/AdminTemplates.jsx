@@ -11,6 +11,7 @@ export function AdminTemplates() {
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newTemplate, setNewTemplate] = useState({ name: '', type: 'EMAIL', subject: '', content: '' });
 
   useEffect(() => {
     loadTemplates();
@@ -69,15 +70,15 @@ export function AdminTemplates() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AdminNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Message Templates</h1>
-              <p className="text-white/60">Manage email, SMS, and push notification templates</p>
+              <h1 className="text-3xl font-bold text-foreground mb-2">Message Templates</h1>
+              <p className="text-muted-foreground">Manage email, SMS, and push notification templates</p>
             </div>
             <Button className="gap-2" onClick={() => setShowCreateModal(true)}>
               <Plus size={18} />
@@ -93,7 +94,7 @@ export function AdminTemplates() {
           ) : templates.length === 0 ? (
             <Card>
               <div className="p-12 text-center">
-                <p className="text-white/60 mb-4">No templates found</p>
+                <p className="text-muted-foreground mb-4">No templates found</p>
                 <Button onClick={() => setShowCreateModal(true)}>Create First Template</Button>
               </div>
             </Card>
@@ -105,12 +106,12 @@ export function AdminTemplates() {
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 bg-white/5 rounded-lg text-[#FF6B35]">
+                        <div className="p-2 bg-muted/50 rounded-lg text-[#FF6B35]">
                           {getTypeIcon(template.type)}
                         </div>
                         <div>
-                          <h3 className="font-bold text-white">{template.name}</h3>
-                          <p className="text-xs text-white/40">{formatDate(template.createdAt)}</p>
+                          <h3 className="font-bold text-foreground">{template.name}</h3>
+                          <p className="text-xs text-muted-foreground">{formatDate(template.createdAt)}</p>
                         </div>
                       </div>
                       <Badge variant={getTypeBadgeVariant(template.type)}>
@@ -121,15 +122,15 @@ export function AdminTemplates() {
                     {/* Subject (for emails) */}
                     {template.subject && (
                       <div className="mb-3">
-                        <p className="text-xs font-medium text-white/60 mb-1">Subject:</p>
-                        <p className="text-sm text-white">{template.subject}</p>
+                        <p className="text-xs font-medium text-muted-foreground mb-1">Subject:</p>
+                        <p className="text-sm text-foreground">{template.subject}</p>
                       </div>
                     )}
 
                     {/* Content Preview */}
                     <div className="mb-4">
-                      <p className="text-xs font-medium text-white/60 mb-1">Content:</p>
-                      <div className="bg-white/5 rounded-lg p-3 text-sm text-white/80 line-clamp-3">
+                      <p className="text-xs font-medium text-muted-foreground mb-1">Content:</p>
+                      <div className="bg-muted/50 rounded-lg p-3 text-sm text-foreground/80 line-clamp-3">
                         {template.content}
                       </div>
                     </div>
@@ -164,54 +165,74 @@ export function AdminTemplates() {
           {/* Create Template Modal - Placeholder */}
           {showCreateModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowCreateModal(false)}>
-              <div className="bg-[#1a1a1a] border border-white/10 rounded-lg p-8 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
-                <h2 className="text-2xl font-bold text-white mb-6">Create New Template</h2>
+              <div className="bg-card border border-border rounded-lg p-8 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
+                <h2 className="text-2xl font-bold text-foreground mb-6">Create New Template</h2>
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Template Name</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Template Name</label>
                     <input
                       type="text"
                       placeholder="Enter template name"
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-white/20"
+                      value={newTemplate.name}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Type</label>
-                    <select className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
-                      <option className="bg-[#1a1a1a]" value="EMAIL">Email</option>
-                      <option className="bg-[#1a1a1a]" value="SMS">SMS</option>
-                      <option className="bg-[#1a1a1a]" value="PUSH">Push Notification</option>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Type</label>
+                    <select
+                      value={newTemplate.type}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, type: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
+                      <option className="bg-card" value="EMAIL">Email</option>
+                      <option className="bg-card" value="SMS">SMS</option>
+                      <option className="bg-card" value="PUSH">Push Notification</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Subject (for emails)</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Subject (for emails)</label>
                     <input
                       type="text"
                       placeholder="Enter email subject"
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-white/20"
+                      value={newTemplate.subject}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, subject: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">Content</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Content</label>
                     <textarea
                       rows={6}
                       placeholder="Enter template content. Use {{variableName}} for dynamic values."
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent resize-none placeholder-white/20"
+                      value={newTemplate.content}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, content: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent resize-none placeholder-muted-foreground"
                     />
-                    <p className="text-xs text-white/40 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Available variables: {'{{orderId}}, {{customerName}}, {{trackingLink}}, {{promoCode}}'}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex gap-3">
-                  <Button onClick={() => {
-                    toast.success('Template created successfully');
-                    setShowCreateModal(false);
+                  <Button onClick={async () => {
+                    if (!newTemplate.name.trim()) { toast.error('Please enter a template name'); return; }
+                    if (!newTemplate.content.trim()) { toast.error('Please enter template content'); return; }
+                    try {
+                      await adminAPI.createTemplate(newTemplate);
+                      toast.success('Template created successfully');
+                      setNewTemplate({ name: '', type: 'EMAIL', subject: '', content: '' });
+                      setShowCreateModal(false);
+                      loadTemplates();
+                    } catch (error) {
+                      console.error('Error creating template:', error);
+                      toast.error('Failed to create template');
+                    }
                   }} className="flex-1">
                     Create Template
                   </Button>

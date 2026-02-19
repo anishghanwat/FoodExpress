@@ -78,21 +78,21 @@ export function OwnerDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-        <div className="text-[#6B7280]">Loading...</div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <OwnerNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Owner Dashboard</h1>
-            <p className="text-white/60">Welcome back! Here's your restaurant overview</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Owner Dashboard</h1>
+            <p className="text-muted-foreground">Welcome back! Here's your restaurant overview</p>
           </div>
 
           {/* Summary Cards */}
@@ -101,14 +101,14 @@ export function OwnerDashboard() {
             <Card className="p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-white/60 text-sm font-medium mb-1">My Restaurants</p>
-                  <p className="text-3xl font-bold text-white">{restaurants.length}</p>
-                  <Link to="/owner/restaurants" className="text-sm text-[#FF6B35] hover:underline mt-2 inline-block">
+                  <p className="text-muted-foreground text-sm font-medium mb-1">My Restaurants</p>
+                  <p className="text-3xl font-bold text-foreground">{restaurants.length}</p>
+                  <Link to="/owner/restaurants" className="text-sm text-primary hover:underline mt-2 inline-block">
                     Manage →
                   </Link>
                 </div>
-                <div className="bg-[#FF6B35]/10 p-3 rounded-lg">
-                  <Store className="w-6 h-6 text-[#FF6B35]" />
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <Store className="w-6 h-6 text-primary" />
                 </div>
               </div>
             </Card>
@@ -117,14 +117,14 @@ export function OwnerDashboard() {
             <Card className="p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-white/60 text-sm font-medium mb-1">Today's Orders</p>
-                  <p className="text-3xl font-bold text-white">{todayOrders.length}</p>
-                  <Link to="/owner/orders" className="text-sm text-[#FF6B35] hover:underline mt-2 inline-block">
+                  <p className="text-muted-foreground text-sm font-medium mb-1">Today's Orders</p>
+                  <p className="text-3xl font-bold text-foreground">{todayOrders.length}</p>
+                  <Link to="/owner/orders" className="text-sm text-primary hover:underline mt-2 inline-block">
                     View all →
                   </Link>
                 </div>
                 <div className="bg-blue-500/10 p-3 rounded-lg">
-                  <ShoppingBag className="w-6 h-6 text-blue-400" />
+                  <ShoppingBag className="w-6 h-6 text-blue-500" />
                 </div>
               </div>
             </Card>
@@ -133,12 +133,12 @@ export function OwnerDashboard() {
             <Card className="p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-white/60 text-sm font-medium mb-1">Today's Revenue</p>
-                  <p className="text-3xl font-bold text-white">{formatCurrency(todayRevenue)}</p>
-                  <p className="text-sm text-white/60 mt-2">From {todayOrders.length} orders</p>
+                  <p className="text-muted-foreground text-sm font-medium mb-1">Today's Revenue</p>
+                  <p className="text-3xl font-bold text-foreground">{formatCurrency(todayRevenue)}</p>
+                  <p className="text-sm text-muted-foreground mt-2">From {todayOrders.length} orders</p>
                 </div>
                 <div className="bg-emerald-500/10 p-3 rounded-lg">
-                  <IndianRupee className="w-6 h-6 text-emerald-400" />
+                  <IndianRupee className="w-6 h-6 text-emerald-500" />
                 </div>
               </div>
             </Card>
@@ -147,16 +147,16 @@ export function OwnerDashboard() {
             <Card className="p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-white/60 text-sm font-medium mb-1">Pending Orders</p>
-                  <p className={`text-3xl font-bold ${pendingOrders.length > 0 ? 'text-[#EF4444]' : 'text-white'}`}>
+                  <p className="text-muted-foreground text-sm font-medium mb-1">Pending Orders</p>
+                  <p className={`text-3xl font-bold ${pendingOrders.length > 0 ? 'text-destructive' : 'text-foreground'}`}>
                     {pendingOrders.length}
                   </p>
-                  <p className="text-sm text-white/60 mt-2">
+                  <p className="text-sm text-muted-foreground mt-2">
                     {pendingOrders.length > 0 ? 'Requires attention' : 'All clear'}
                   </p>
                 </div>
-                <div className={`p-3 rounded-lg ${pendingOrders.length > 0 ? 'bg-red-500/10' : 'bg-white/5'}`}>
-                  <AlertCircle className={`w-6 h-6 ${pendingOrders.length > 0 ? 'text-[#EF4444]' : 'text-white/40'}`} />
+                <div className={`p-3 rounded-lg ${pendingOrders.length > 0 ? 'bg-destructive/10' : 'bg-muted/50'}`}>
+                  <AlertCircle className={`w-6 h-6 ${pendingOrders.length > 0 ? 'text-destructive' : 'text-muted-foreground'}`} />
                 </div>
               </div>
             </Card>
@@ -164,16 +164,16 @@ export function OwnerDashboard() {
 
           {/* My Restaurants */}
           <Card className="mb-8">
-            <div className="p-6 border-b border-white/10 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-white">My Restaurants</h2>
+            <div className="p-6 border-b border-border flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground">My Restaurants</h2>
               <Link to="/owner/restaurants">
                 <Button variant="primary">Manage Restaurants</Button>
               </Link>
             </div>
             {restaurants.length === 0 ? (
               <div className="p-12 text-center">
-                <Store size={48} className="mx-auto mb-4 text-white/20" />
-                <p className="text-white/60 mb-4">You don't have any restaurants yet</p>
+                <Store size={48} className="mx-auto mb-4 text-muted-foreground" />
+                <p className="text-muted-foreground mb-4">You don't have any restaurants yet</p>
                 <Link to="/owner/restaurants">
                   <Button>Add Your First Restaurant</Button>
                 </Link>
@@ -189,15 +189,15 @@ export function OwnerDashboard() {
                         className="w-20 h-20 rounded-lg object-cover"
                       />
                       <div className="flex-1">
-                        <h3 className="font-bold text-white mb-1">{restaurant.name}</h3>
-                        <p className="text-sm text-white/60 mb-2">{restaurant.cuisine}</p>
+                        <h3 className="font-bold text-foreground mb-1">{restaurant.name}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">{restaurant.cuisine}</p>
                         <div className="flex items-center gap-2">
                           <div className="flex items-center">
                             <Star className="w-4 h-4 fill-[#FBBF24] text-[#FBBF24] mr-1" />
                             <span className="text-sm font-medium">{restaurant.rating}</span>
                           </div>
-                          <span className="text-sm text-white/60">•</span>
-                          <span className="text-sm text-white/60">{restaurant.estimatedDeliveryTime} min</span>
+                          <span className="text-sm text-muted-foreground">•</span>
+                          <span className="text-sm text-muted-foreground">{restaurant.estimatedDeliveryTime} min</span>
                         </div>
                       </div>
                     </div>
@@ -214,39 +214,39 @@ export function OwnerDashboard() {
 
           {/* Recent Orders */}
           <Card>
-            <div className="p-6 border-b border-white/10 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-white">Recent Orders</h2>
+            <div className="p-6 border-b border-border flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground">Recent Orders</h2>
               <Link to="/owner/orders">
                 <Button variant="outline">View All Orders</Button>
               </Link>
             </div>
             {orders.length === 0 ? (
               <div className="p-12 text-center">
-                <ShoppingBag size={48} className="mx-auto mb-4 text-white/20" />
-                <p className="text-white/60">No orders yet</p>
+                <ShoppingBag size={48} className="mx-auto mb-4 text-muted-foreground" />
+                <p className="text-muted-foreground">No orders yet</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-white/5">
+                  <thead className="bg-muted/50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase">Order ID</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase">Items</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase">Total</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase">Time</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Order ID</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Items</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Total</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase">Time</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-transparent divide-y divide-white/10">
+                  <tbody className="bg-transparent divide-y divide-border">
                     {orders.slice(0, 10).map((order) => (
-                      <tr key={order.id} className="hover:bg-white/5 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                      <tr key={order.id} className="hover:bg-muted/50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                           #{order.id}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {order.items?.length || 0} items
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                           {formatCurrency(order.totalAmount)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -254,7 +254,7 @@ export function OwnerDashboard() {
                             {order.status}
                           </Badge>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {new Date(order.createdAt).toLocaleString()}
                         </td>
                       </tr>

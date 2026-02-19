@@ -39,8 +39,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: unmesh.unm@gmail.com
-    password: swvzgokidbmqtkvk
+    username: Fooddelapp@gmail.com
+    password: ebxr vrbo rzkg hznp
     properties:
       mail:
         smtp:
@@ -52,7 +52,7 @@ spring:
 
 app:
   mail:
-    from: unmesh.unm@gmail.com
+    from: Fooddelapp@gmail.com
     from-name: FoodExpress
 
 eureka:

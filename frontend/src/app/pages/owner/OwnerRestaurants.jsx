@@ -143,21 +143,21 @@ export function OwnerRestaurants() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-        <div className="text-[#6B7280]">Loading...</div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <OwnerNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">My Restaurants</h1>
-            <p className="text-white/60">Manage your restaurant locations</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">My Restaurants</h1>
+            <p className="text-muted-foreground">Manage your restaurant locations</p>
           </div>
 
           {/* Add New Restaurant Button */}
@@ -186,7 +186,7 @@ export function OwnerRestaurants() {
                   <div className="flex-1 p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2">{restaurant.name}</h3>
+                        <h3 className="text-xl font-bold text-foreground mb-2">{restaurant.name}</h3>
                         <Badge variant={restaurant.isActive ? 'success' : 'default'}>
                           {restaurant.isActive ? 'OPEN' : 'CLOSED'}
                         </Badge>
@@ -205,36 +205,36 @@ export function OwnerRestaurants() {
                     </div>
 
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-start text-sm text-white/60">
+                      <div className="flex items-start text-sm text-muted-foreground">
                         <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                         <span>{restaurant.address}</span>
                       </div>
-                      <div className="flex items-center text-sm text-white/60">
+                      <div className="flex items-center text-sm text-muted-foreground">
                         <Phone className="w-4 h-4 mr-2" />
                         <span>{restaurant.phone}</span>
                       </div>
-                      <div className="flex items-center text-sm text-white/60">
+                      <div className="flex items-center text-sm text-muted-foreground">
                         <Clock className="w-4 h-4 mr-2" />
                         <span>{restaurant.cuisine} Cuisine</span>
                       </div>
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-white/5 rounded-lg">
+                    <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-muted/50 rounded-lg">
                       <div>
-                        <p className="text-xs text-white/60 mb-1">Rating</p>
+                        <p className="text-xs text-muted-foreground mb-1">Rating</p>
                         <div className="flex items-center">
                           <Star className="w-4 h-4 fill-[#FBBF24] text-[#FBBF24] mr-1" />
-                          <p className="text-lg font-bold text-white">{restaurant.rating || 'N/A'}</p>
+                          <p className="text-lg font-bold text-foreground">{restaurant.rating || 'N/A'}</p>
                         </div>
                       </div>
                       <div>
-                        <p className="text-xs text-white/60 mb-1">Reviews</p>
-                        <p className="text-lg font-bold text-white">{restaurant.totalReviews || 0}</p>
+                        <p className="text-xs text-muted-foreground mb-1">Reviews</p>
+                        <p className="text-lg font-bold text-foreground">{restaurant.totalReviews || 0}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-white/60 mb-1">Delivery</p>
-                        <p className="text-lg font-bold text-white">{restaurant.estimatedDeliveryTime || 'N/A'} min</p>
+                        <p className="text-xs text-muted-foreground mb-1">Delivery</p>
+                        <p className="text-lg font-bold text-foreground">{restaurant.estimatedDeliveryTime || 'N/A'} min</p>
                       </div>
                     </div>
 
@@ -243,7 +243,7 @@ export function OwnerRestaurants() {
                       <Button
                         onClick={() => openEditModal(restaurant)}
                         variant="outline"
-                        className="flex-1 border-[#FF6B35] text-[#FF6B35] hover:bg-[#FF6B35] hover:text-white"
+                        className="flex-1 border-[#FF6B35] text-[#FF6B35] hover:bg-[#FF6B35] hover:text-foreground"
                       >
                         <Edit className="w-4 h-4 mr-2" />
                         Edit
@@ -251,7 +251,7 @@ export function OwnerRestaurants() {
                       <Button
                         onClick={() => viewStats(restaurant)}
                         variant="outline"
-                        className="flex-1 border-[#004E89] text-[#004E89] hover:bg-[#004E89] hover:text-white"
+                        className="flex-1 border-[#004E89] text-[#004E89] hover:bg-[#004E89] hover:text-foreground"
                       >
                         <TrendingUp className="w-4 h-4 mr-2" />
                         View Stats
@@ -267,11 +267,11 @@ export function OwnerRestaurants() {
           {restaurants.length === 0 && (
             <Card className="p-12 text-center">
               <div className="max-w-md mx-auto">
-                <div className="bg-white/5 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-white/40" />
+                <div className="bg-muted/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="w-8 h-8 text-muted-foreground" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">No Restaurants Yet</h3>
-                <p className="text-white/60 mb-6">
+                <h3 className="text-xl font-bold text-foreground mb-2">No Restaurants Yet</h3>
+                <p className="text-muted-foreground mb-6">
                   Get started by adding your first restaurant location
                 </p>
                 <Button className="bg-[#FF6B35] hover:bg-[#FF5722] text-white" onClick={() => setShowAddModal(true)}>
@@ -287,64 +287,64 @@ export function OwnerRestaurants() {
       {/* Add Restaurant Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-[#1a1a1a] border border-white/10 p-8 rounded-lg shadow-lg w-full max-w-2xl">
+          <div className="bg-card border border-border p-8 rounded-lg shadow-lg w-full max-w-2xl">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-white">Add New Restaurant</h2>
-              <button className="text-white/60 hover:text-white" onClick={() => setShowAddModal(false)}>
+              <h2 className="text-xl font-bold text-foreground">Add New Restaurant</h2>
+              <button className="text-muted-foreground hover:text-foreground" onClick={() => setShowAddModal(false)}>
                 <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={handleAddRestaurant}>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Name</label>
+                <label className="block text-sm font-medium text-muted-foreground">Name</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Address</label>
+                <label className="block text-sm font-medium text-muted-foreground">Address</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Phone</label>
+                <label className="block text-sm font-medium text-muted-foreground">Phone</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Cuisine Type</label>
+                <label className="block text-sm font-medium text-muted-foreground">Cuisine Type</label>
                 <select
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                   value={formData.cuisine}
                   onChange={(e) => setFormData({ ...formData, cuisine: e.target.value })}
                 >
-                  <option className="bg-[#1a1a1a]" value="Italian">Italian</option>
-                  <option className="bg-[#1a1a1a]" value="American">American</option>
-                  <option className="bg-[#1a1a1a]" value="Mexican">Mexican</option>
-                  <option className="bg-[#1a1a1a]" value="Chinese">Chinese</option>
-                  <option className="bg-[#1a1a1a]" value="Indian">Indian</option>
-                  <option className="bg-[#1a1a1a]" value="Japanese">Japanese</option>
+                  <option className="bg-card text-foreground" value="Italian">Italian</option>
+                  <option className="bg-card text-foreground" value="American">American</option>
+                  <option className="bg-card text-foreground" value="Mexican">Mexican</option>
+                  <option className="bg-card text-foreground" value="Chinese">Chinese</option>
+                  <option className="bg-card text-foreground" value="Indian">Indian</option>
+                  <option className="bg-card text-foreground" value="Japanese">Japanese</option>
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Image URL</label>
+                <label className="block text-sm font-medium text-muted-foreground">Image URL</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.imageUrl}
                   onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                   placeholder="https://images.unsplash.com/..."
@@ -363,64 +363,64 @@ export function OwnerRestaurants() {
       {/* Edit Restaurant Modal */}
       {showEditModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-[#1a1a1a] border border-white/10 p-8 rounded-lg shadow-lg w-full max-w-2xl">
+          <div className="bg-card border border-border p-8 rounded-lg shadow-lg w-full max-w-2xl">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-white">Edit Restaurant</h2>
-              <button className="text-white/60 hover:text-white" onClick={() => setShowEditModal(false)}>
+              <h2 className="text-xl font-bold text-foreground">Edit Restaurant</h2>
+              <button className="text-muted-foreground hover:text-foreground" onClick={() => setShowEditModal(false)}>
                 <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={handleEditRestaurant}>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Name</label>
+                <label className="block text-sm font-medium text-muted-foreground">Name</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Address</label>
+                <label className="block text-sm font-medium text-muted-foreground">Address</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Phone</label>
+                <label className="block text-sm font-medium text-muted-foreground">Phone</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Cuisine Type</label>
+                <label className="block text-sm font-medium text-muted-foreground">Cuisine Type</label>
                 <select
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                   value={formData.cuisine}
                   onChange={(e) => setFormData({ ...formData, cuisine: e.target.value })}
                 >
-                  <option className="bg-[#1a1a1a]" value="Italian">Italian</option>
-                  <option className="bg-[#1a1a1a]" value="American">American</option>
-                  <option className="bg-[#1a1a1a]" value="Mexican">Mexican</option>
-                  <option className="bg-[#1a1a1a]" value="Chinese">Chinese</option>
-                  <option className="bg-[#1a1a1a]" value="Indian">Indian</option>
-                  <option className="bg-[#1a1a1a]" value="Japanese">Japanese</option>
+                  <option className="bg-card text-foreground" value="Italian">Italian</option>
+                  <option className="bg-card text-foreground" value="American">American</option>
+                  <option className="bg-card text-foreground" value="Mexican">Mexican</option>
+                  <option className="bg-card text-foreground" value="Chinese">Chinese</option>
+                  <option className="bg-card text-foreground" value="Indian">Indian</option>
+                  <option className="bg-card text-foreground" value="Japanese">Japanese</option>
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-white/60">Image URL</label>
+                <label className="block text-sm font-medium text-muted-foreground">Image URL</label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md shadow-sm text-white focus:outline-none focus:ring-[#FF6B35] focus:border-[#FF6B35] sm:text-sm placeholder-white/20"
+                  className="mt-1 block w-full px-3 py-2 bg-input border border-border rounded-md shadow-sm text-foreground focus:outline-none focus:ring-primary focus:border-primary sm:text-sm placeholder-muted-foreground"
                   value={formData.imageUrl}
                   onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                   placeholder="https://images.unsplash.com/..."
