@@ -48,6 +48,26 @@ EC2 Instance (t3.medium or larger)
 
 1. **AWS Account** (Free tier eligible)
 2. **Domain Name** (optional but recommended)
+3. **GitHub Account** (for code repository)
+
+### Accessing Your EC2 Instance
+
+You have two options to access your EC2 instance:
+
+#### Option 1: EC2 Instance Connect (Recommended - No SSH Key Needed)
+1. Go to AWS Console → EC2 → Instances
+2. Select your instance
+3. Click "Connect" button at the top
+4. Choose "EC2 Instance Connect" tab
+5. Click "Connect" - opens browser-based terminal
+6. **Advantages:**
+   - No SSH key management
+   - No IP restrictions
+   - Works from any browser
+   - No connection timeout issues
+
+#### Option 2: SSH (Traditional Method)
+Requires SSH key and proper security group configuration. May have connection issues if your IP changes frequently.
    - Can use Route 53 or external provider
    - Example: foodexpress.com
 3. **Local Tools**
