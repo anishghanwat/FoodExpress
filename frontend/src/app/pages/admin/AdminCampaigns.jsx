@@ -11,11 +11,22 @@ export function AdminCampaigns() {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [newCampaign, setNewCampaign] = useState({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS' });
+  const [newCampaign, setNewCampaign] = useState({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS', templateId: '' });
+  const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
     loadCampaigns();
+    loadTemplates();
   }, []);
+
+  const loadTemplates = async () => {
+    try {
+      const data = await adminAPI.getTemplates();
+      setTemplates(data);
+    } catch (error) {
+      console.error('Error loading templates:', error);
+    }
+  };
 
   const loadCampaigns = async () => {
     try {
@@ -254,6 +265,22 @@ export function AdminCampaigns() {
                       <option className="bg-card" value="PREMIUM_CUSTOMERS">Premium Customers</option>
                     </select>
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Notification Template</label>
+                    <select
+                      value={newCampaign.templateId}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, templateId: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
+                      <option className="bg-card" value="">None (Use default)</option>
+                      {templates.map(template => (
+                        <option key={template.id} className="bg-card" value={template.id}>
+                          {template.name} ({template.type})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="flex gap-3">
@@ -262,7 +289,7 @@ export function AdminCampaigns() {
                     try {
                       await adminAPI.createCampaign(newCampaign);
                       toast.success('Campaign created as draft');
-                      setNewCampaign({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS' });
+                      setNewCampaign({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS', templateId: '' });
                       setShowCreateModal(false);
                       loadCampaigns();
                     } catch (error) {

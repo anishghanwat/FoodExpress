@@ -1,7 +1,9 @@
 package com.fooddelivery.notification.service;
 
 import com.fooddelivery.notification.entity.Campaign;
+import com.fooddelivery.notification.entity.NotificationTemplate;
 import com.fooddelivery.notification.repository.CampaignRepository;
+import com.fooddelivery.notification.repository.NotificationTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final NotificationTemplateRepository templateRepository;
     private final EmailService emailService;
     private final RestTemplate restTemplate;
 
@@ -77,11 +80,33 @@ public class CampaignService {
                 return;
             }
 
+            // Fetch template if linked
+            NotificationTemplate template = null;
+            if (campaign.getTemplateId() != null) {
+                template = templateRepository.findById(campaign.getTemplateId()).orElse(null);
+            }
+
             int sentCount = 0;
             for (Map<String, Object> user : users) {
                 String email = (String) user.get("email");
+                String name = (String) user.get("name");
                 if (email != null && !email.isBlank()) {
-                    emailService.sendCampaignEmail(email, campaign.getName(), buildCampaignContent(campaign));
+                    String subject = campaign.getName();
+                    String content = buildCampaignContent(campaign);
+
+                    if (template != null) {
+                        if (template.getSubject() != null && !template.getSubject().isBlank()) {
+                            subject = template.getSubject();
+                        }
+                        content = template.getContent();
+                        // Replace dynamic variables
+                        if (name != null) {
+                            content = content.replace("{{customerName}}", name);
+                        }
+                        content = content.replace("{{placeholder}}", "there"); // Fallback
+                    }
+
+                    emailService.sendCampaignEmail(email, subject, content);
                     sentCount++;
                 }
             }

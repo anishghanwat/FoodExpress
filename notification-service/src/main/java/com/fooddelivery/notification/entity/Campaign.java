@@ -26,6 +26,7 @@ public class Campaign {
 
     @Column(nullable = false, length = 30)
     private String segment; // ALL_CUSTOMERS, ACTIVE_CUSTOMERS, PREMIUM_CUSTOMERS
+    private Long templateId; // Link to NotificationTemplate
 
     @Column(nullable = false, length = 20)
     private String status = "DRAFT"; // DRAFT, SCHEDULED, SENT

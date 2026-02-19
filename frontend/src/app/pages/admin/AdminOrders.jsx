@@ -6,6 +6,7 @@ import { Badge } from '../../components/Badge';
 import { Input } from '../../components/Input';
 import { AdminNav } from '../../components/AdminNav';
 import orderService from '../../services/orderService';
+import restaurantService from '../../services/restaurantService';
 import { formatCurrency } from '../../utils/helpers';
 import { toast } from 'sonner';
 
@@ -14,12 +15,26 @@ export function AdminOrders() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [restaurantNames, setRestaurantNames] = useState({});
 
   useEffect(() => {
     loadOrders();
+    loadRestaurantNames();
     const interval = setInterval(loadOrders, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const loadRestaurantNames = async () => {
+    try {
+      const data = await restaurantService.getAll();
+      const restaurants = data?.restaurants || data || [];
+      const nameMap = {};
+      restaurants.forEach(r => { nameMap[r.id] = r.name; });
+      setRestaurantNames(nameMap);
+    } catch (error) {
+      console.error('Error loading restaurant names:', error);
+    }
+  };
 
   const loadOrders = async () => {
     try {
@@ -84,7 +99,7 @@ export function AdminOrders() {
       ['Order ID', 'Restaurant', 'Status', 'Amount', 'Date', 'Items'].join(','),
       ...filteredOrders.map(order => [
         order.id,
-        `Restaurant #${order.restaurantId}`,
+        restaurantNames[order.restaurantId] || `Restaurant #${order.restaurantId}`,
         order.status,
         order.totalAmount?.toFixed(2) || '0.00',
         new Date(order.createdAt).toLocaleDateString(),
@@ -235,7 +250,7 @@ export function AdminOrders() {
                         <div className="text-sm font-medium text-[#FF6B35]">#{order.id}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-foreground">Restaurant #{order.restaurantId}</div>
+                        <div className="text-sm text-foreground">{restaurantNames[order.restaurantId] || `Restaurant #${order.restaurantId}`}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <Badge variant={getStatusBadgeVariant(order.status)}>
