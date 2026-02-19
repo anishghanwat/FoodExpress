@@ -11,6 +11,7 @@ export function AdminTemplates() {
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newTemplate, setNewTemplate] = useState({ name: '', type: 'EMAIL', subject: '', content: '' });
 
   useEffect(() => {
     loadTemplates();
@@ -173,13 +174,19 @@ export function AdminTemplates() {
                     <input
                       type="text"
                       placeholder="Enter template name"
+                      value={newTemplate.name}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
                       className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-2">Type</label>
-                    <select className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
+                    <select
+                      value={newTemplate.type}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, type: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
                       <option className="bg-card" value="EMAIL">Email</option>
                       <option className="bg-card" value="SMS">SMS</option>
                       <option className="bg-card" value="PUSH">Push Notification</option>
@@ -191,6 +198,8 @@ export function AdminTemplates() {
                     <input
                       type="text"
                       placeholder="Enter email subject"
+                      value={newTemplate.subject}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, subject: e.target.value })}
                       className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
@@ -200,6 +209,8 @@ export function AdminTemplates() {
                     <textarea
                       rows={6}
                       placeholder="Enter template content. Use {{variableName}} for dynamic values."
+                      value={newTemplate.content}
+                      onChange={(e) => setNewTemplate({ ...newTemplate, content: e.target.value })}
                       className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent resize-none placeholder-muted-foreground"
                     />
                     <p className="text-xs text-muted-foreground mt-1">
@@ -209,9 +220,19 @@ export function AdminTemplates() {
                 </div>
 
                 <div className="flex gap-3">
-                  <Button onClick={() => {
-                    toast.success('Template created successfully');
-                    setShowCreateModal(false);
+                  <Button onClick={async () => {
+                    if (!newTemplate.name.trim()) { toast.error('Please enter a template name'); return; }
+                    if (!newTemplate.content.trim()) { toast.error('Please enter template content'); return; }
+                    try {
+                      await adminAPI.createTemplate(newTemplate);
+                      toast.success('Template created successfully');
+                      setNewTemplate({ name: '', type: 'EMAIL', subject: '', content: '' });
+                      setShowCreateModal(false);
+                      loadTemplates();
+                    } catch (error) {
+                      console.error('Error creating template:', error);
+                      toast.error('Failed to create template');
+                    }
                   }} className="flex-1">
                     Create Template
                   </Button>

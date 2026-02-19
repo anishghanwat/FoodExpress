@@ -11,6 +11,7 @@ export function AdminCampaigns() {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newCampaign, setNewCampaign] = useState({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS' });
 
   useEffect(() => {
     loadCampaigns();
@@ -222,13 +223,19 @@ export function AdminCampaigns() {
                     <input
                       type="text"
                       placeholder="Enter campaign name"
+                      value={newCampaign.name}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, name: e.target.value })}
                       className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent placeholder-muted-foreground"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-2">Type</label>
-                    <select className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
+                    <select
+                      value={newCampaign.type}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, type: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
                       <option className="bg-card" value="PROMOTIONAL">Promotional</option>
                       <option className="bg-card" value="ANNOUNCEMENT">Announcement</option>
                       <option className="bg-card" value="LOYALTY">Loyalty</option>
@@ -237,7 +244,11 @@ export function AdminCampaigns() {
 
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-2">Target Segment</label>
-                    <select className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
+                    <select
+                      value={newCampaign.segment}
+                      onChange={(e) => setNewCampaign({ ...newCampaign, segment: e.target.value })}
+                      className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                    >
                       <option className="bg-card" value="ALL_CUSTOMERS">All Customers</option>
                       <option className="bg-card" value="ACTIVE_CUSTOMERS">Active Customers</option>
                       <option className="bg-card" value="PREMIUM_CUSTOMERS">Premium Customers</option>
@@ -246,9 +257,18 @@ export function AdminCampaigns() {
                 </div>
 
                 <div className="flex gap-3">
-                  <Button onClick={() => {
-                    toast.success('Campaign created as draft');
-                    setShowCreateModal(false);
+                  <Button onClick={async () => {
+                    if (!newCampaign.name.trim()) { toast.error('Please enter a campaign name'); return; }
+                    try {
+                      await adminAPI.createCampaign(newCampaign);
+                      toast.success('Campaign created as draft');
+                      setNewCampaign({ name: '', type: 'PROMOTIONAL', segment: 'ALL_CUSTOMERS' });
+                      setShowCreateModal(false);
+                      loadCampaigns();
+                    } catch (error) {
+                      console.error('Error creating campaign:', error);
+                      toast.error('Failed to create campaign');
+                    }
                   }} className="flex-1">
                     Create Campaign
                   </Button>

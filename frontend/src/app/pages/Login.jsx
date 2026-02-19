@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useNavigate, useLocation } from 'react-router';
 import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -57,7 +58,8 @@ export function Login() {
       if (error.response?.data?.message === 'User not found') {
         setShowNotFoundDialog(true);
       } else {
-        console.error('Login error:', error);
+        const message = error.response?.data?.message || 'Invalid email or password';
+        toast.error(message);
       }
     } finally {
       setLoading(false);
