@@ -20,6 +20,7 @@ public class DeliveryEvent {
     // Delivery details
     private Long deliveryId;
     private Long orderId;
+    private Long customerId;
     private Long agentId;
     private String agentName;
     private DeliveryStatus status;
@@ -39,13 +40,14 @@ public class DeliveryEvent {
     private Integer estimatedTimeMinutes;
     
     // Constructor for creating events
-    public DeliveryEvent(String eventType, Long deliveryId, Long orderId, Long agentId, DeliveryStatus status) {
+    public DeliveryEvent(String eventType, Long deliveryId, Long orderId, Long customerId, Long agentId, DeliveryStatus status) {
         this.eventId = UUID.randomUUID().toString();
         this.eventType = eventType;
         this.timestamp = LocalDateTime.now();
         this.source = "delivery-service";
         this.deliveryId = deliveryId;
         this.orderId = orderId;
+        this.customerId = customerId;
         this.agentId = agentId;
         this.status = status;
     }

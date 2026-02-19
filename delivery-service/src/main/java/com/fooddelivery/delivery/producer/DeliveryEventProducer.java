@@ -24,6 +24,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_ASSIGNED",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
@@ -40,6 +41,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_PICKED_UP",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
@@ -54,6 +56,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_IN_TRANSIT",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
@@ -68,6 +71,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_DELIVERED",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
@@ -82,6 +86,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_CANCELLED",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
@@ -95,6 +100,7 @@ public class DeliveryEventProducer {
                 "DELIVERY_LOCATION_UPDATED",
                 delivery.getId(),
                 delivery.getOrderId(),
+                delivery.getCustomerId(),
                 delivery.getAgentId(),
                 delivery.getStatus()
         );
