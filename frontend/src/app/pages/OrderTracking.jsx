@@ -13,6 +13,7 @@ import userService from '../services/userService';
 import { formatCurrency } from '../utils/helpers';
 import { geocodeAddress } from '../utils/mapHelpers';
 import { toast } from 'sonner';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function OrderTracking() {
   const { id } = useParams();
@@ -267,10 +268,10 @@ export function OrderTracking() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF6B35] mx-auto mb-4"></div>
-          <p className="text-white/40">Loading tracking information...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading tracking information...</p>
         </div>
       </div>
     );
@@ -278,9 +279,9 @@ export function OrderTracking() {
 
   if (!tracking) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <p className="text-white/40 mb-4">Order not found</p>
+          <p className="text-muted-foreground mb-4">Order not found</p>
           <Button onClick={() => navigate('/orders/history')} variant="outline">View Order History</Button>
         </div>
       </div>
@@ -291,30 +292,33 @@ export function OrderTracking() {
   const currentStepIndex = Math.max(0, tracking.timeline.length - 1);
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
               onClick={() => navigate('/orders/history')}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
             >
               <ArrowLeft size={18} />
               Back to Orders
             </button>
-            <h1 className="text-lg font-bold text-white">Order #{id}</h1>
-            <button
-              onClick={handleManualRefresh}
-              disabled={refreshing}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors disabled:opacity-50 text-sm"
-            >
-              <RefreshCw size={16} className={refreshing ? 'animate-spin' : ''} />
-              <span className="hidden sm:inline">Refresh</span>
-            </button>
+            <h1 className="text-lg font-bold text-foreground">Order #{id}</h1>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <button
+                onClick={handleManualRefresh}
+                disabled={refreshing}
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50 text-sm"
+              >
+                <RefreshCw size={16} className={refreshing ? 'animate-spin' : ''} />
+                <span className="hidden sm:inline">Refresh</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Status Banner */}
@@ -338,9 +342,9 @@ export function OrderTracking() {
             <Card>
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-base font-bold text-white">Order Status</h3>
+                  <h3 className="text-base font-bold text-card-foreground">Order Status</h3>
                   {lastUpdated && (
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-muted-foreground">
                       Updated {new Date(lastUpdated).toLocaleTimeString()}
                     </p>
                   )}
@@ -356,22 +360,22 @@ export function OrderTracking() {
                       <div key={step.key} className="flex gap-4">
                         <div className="flex flex-col items-center">
                           <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isCompleted ? 'bg-[#10B981] text-white'
-                            : isCurrent ? 'bg-[#FF6B35] text-white animate-pulse'
-                              : 'bg-white/10 text-white/30'
+                            : isCurrent ? 'bg-primary text-primary-foreground animate-pulse'
+                              : 'bg-muted/50 text-muted-foreground'
                             }`}>
                             <Icon size={20} />
                           </div>
                           {index < statusSteps.length - 1 && (
-                            <div className={`w-0.5 h-10 mt-2 transition-all ${isCompleted ? 'bg-[#10B981]' : 'bg-white/10'}`} />
+                            <div className={`w-0.5 h-10 mt-2 transition-all ${isCompleted ? 'bg-[#10B981]' : 'bg-muted/50'}`} />
                           )}
                         </div>
 
                         <div className="flex-1 pb-6">
-                          <h4 className={`font-medium mb-1 text-sm ${isCompleted || isCurrent ? 'text-white' : 'text-white/30'
+                          <h4 className={`font-medium mb-1 text-sm ${isCompleted || isCurrent ? 'text-foreground' : 'text-muted-foreground'
                             }`}>
                             {step.label}
                           </h4>
-                          <p className={`text-xs ${isCompleted || isCurrent ? 'text-white/50' : 'text-white/20'
+                          <p className={`text-xs ${isCompleted || isCurrent ? 'text-muted-foreground' : 'text-muted-foreground/50'
                             }`}>
                             {step.description}
                           </p>
@@ -423,25 +427,25 @@ export function OrderTracking() {
             {/* Order Details */}
             <Card>
               <div className="p-5">
-                <h3 className="font-bold text-white mb-4 text-sm">Order Details</h3>
+                <h3 className="font-bold text-card-foreground mb-4 text-sm">Order Details</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-xs text-white/40">Restaurant</p>
-                    <p className="font-medium text-white text-sm">{tracking.restaurantName}</p>
+                    <p className="text-xs text-muted-foreground">Restaurant</p>
+                    <p className="font-medium text-foreground text-sm">{tracking.restaurantName}</p>
                   </div>
-                  <div className="border-t border-white/10 pt-3">
-                    <p className="text-xs text-white/40 mb-2">Items</p>
+                  <div className="border-t border-border pt-3">
+                    <p className="text-xs text-muted-foreground mb-2">Items</p>
                     {tracking.items.map((item, idx) => (
                       <div key={idx} className="flex justify-between text-sm mb-1">
-                        <span className="text-white/70">{item.quantity}x {item.itemName}</span>
-                        <span className="text-white/40">{formatCurrency(item.price * item.quantity)}</span>
+                        <span className="text-foreground/80">{item.quantity}x {item.itemName}</span>
+                        <span className="text-muted-foreground">{formatCurrency(item.price * item.quantity)}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="border-t border-white/10 pt-3">
+                  <div className="border-t border-border pt-3">
                     <div className="flex justify-between font-bold">
-                      <span className="text-white">Total</span>
-                      <span className="text-[#FF6B35]">{formatCurrency(tracking.totalAmount)}</span>
+                      <span className="text-foreground">Total</span>
+                      <span className="text-primary">{formatCurrency(tracking.totalAmount)}</span>
                     </div>
                   </div>
                 </div>
@@ -451,8 +455,8 @@ export function OrderTracking() {
             {/* Delivery Address */}
             <Card>
               <div className="p-5">
-                <h3 className="font-bold text-white mb-3 text-sm">Delivery Address</h3>
-                <p className="text-white/50 text-sm">{tracking.deliveryAddress}</p>
+                <h3 className="font-bold text-card-foreground mb-3 text-sm">Delivery Address</h3>
+                <p className="text-muted-foreground text-sm">{tracking.deliveryAddress}</p>
               </div>
             </Card>
 
@@ -460,14 +464,14 @@ export function OrderTracking() {
             {tracking.agentName && tracking.agentName !== 'Not assigned yet' && tracking.status !== 'DELIVERED' && (
               <Card>
                 <div className="p-5">
-                  <h3 className="font-bold text-white mb-4 text-sm">Delivery Agent</h3>
+                  <h3 className="font-bold text-card-foreground mb-4 text-sm">Delivery Agent</h3>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-[#FF6B35] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold text-sm">
                       {tracking.agentName.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-medium text-white text-sm">{tracking.agentName}</p>
-                      <div className="flex items-center gap-1 text-xs text-white/40">
+                      <p className="font-medium text-foreground text-sm">{tracking.agentName}</p>
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <User size={12} />
                         <span>Delivery Partner</span>
                       </div>
@@ -489,12 +493,12 @@ export function OrderTracking() {
             {/* Help & Support */}
             <Card>
               <div className="p-5">
-                <h3 className="font-bold text-white mb-4 text-sm">Need Help?</h3>
+                <h3 className="font-bold text-card-foreground mb-4 text-sm">Need Help?</h3>
                 <div className="space-y-2">
                   {(tracking.status === 'PENDING' || tracking.status === 'CONFIRMED') && (
                     <Button
                       variant="outline"
-                      className="w-full justify-center text-[#EF4444] border-[#EF4444]/50 hover:bg-[#EF4444]/10 text-sm"
+                      className="w-full justify-center text-destructive border-destructive/50 hover:bg-destructive/10 text-sm"
                       onClick={handleCancelOrder}
                     >
                       Cancel Order
@@ -510,7 +514,7 @@ export function OrderTracking() {
             {tracking.status === 'DELIVERED' && (
               <Card>
                 <div className="p-5">
-                  <h3 className="font-bold text-white mb-4 text-sm">Order Complete</h3>
+                  <h3 className="font-bold text-card-foreground mb-4 text-sm">Order Complete</h3>
                   <div className="space-y-2">
                     <Link to="/restaurants">
                       <Button className="w-full justify-center text-sm">Order Again</Button>

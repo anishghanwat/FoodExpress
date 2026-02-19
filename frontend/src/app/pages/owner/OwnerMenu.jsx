@@ -173,34 +173,34 @@ export function OwnerMenu() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-[#6B7280]">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <OwnerNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Menu Management</h1>
-            <p className="text-white/60">Add, edit, and manage your menu items</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Menu Management</h1>
+            <p className="text-muted-foreground">Add, edit, and manage your menu items</p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div className="w-full sm:w-auto">
-              <label className="block text-sm font-medium text-white/60 mb-2">
+              <label className="block text-sm font-medium text-muted-foreground mb-2">
                 Select Restaurant
               </label>
               <select
                 value={selectedRestaurant || ''}
                 onChange={(e) => setSelectedRestaurant(Number(e.target.value))}
-                className="w-full sm:w-64 px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent"
+                className="w-full sm:w-64 px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {restaurants.map((restaurant) => (
-                  <option className="bg-[#1a1a1a]" key={restaurant.id} value={restaurant.id}>
+                  <option className="bg-card" key={restaurant.id} value={restaurant.id}>
                     {restaurant.name}
                   </option>
                 ))}
@@ -216,13 +216,13 @@ export function OwnerMenu() {
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
                     type="text"
                     placeholder="Search menu items..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none placeholder-white/20"
+                    className="w-full pl-10 px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none placeholder-muted-foreground"
                   />
                 </div>
               </div>
@@ -234,7 +234,7 @@ export function OwnerMenu() {
                     onClick={() => setSelectedCategory(category)}
                     className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition ${selectedCategory === category
                       ? 'bg-[#FF6B35] text-white'
-                      : 'bg-white/5 text-white/60 hover:bg-white/10'
+                      : 'bg-muted/50 text-muted-foreground hover:bg-muted'
                       }`}
                   >
                     {category}
@@ -247,28 +247,28 @@ export function OwnerMenu() {
           <Card className="overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-white/5 border-b border-white/10">
+                <thead className="bg-muted/50 border-b border-border">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Item
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Price
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Available
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-transparent divide-y divide-white/10">
                   {filteredItems.map((item) => (
-                    <tr key={item.id} className="hover:bg-white/5 transition-colors">
+                    <tr key={item.id} className="hover:bg-muted/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center">
                           <img
@@ -277,15 +277,15 @@ export function OwnerMenu() {
                             className="w-12 h-12 rounded-lg object-cover mr-4"
                           />
                           <div>
-                            <p className="font-medium text-white">{item.name}</p>
-                            <p className="text-sm text-white/60 line-clamp-1">{item.description}</p>
+                            <p className="font-medium text-foreground">{item.name}</p>
+                            <p className="text-sm text-muted-foreground line-clamp-1">{item.description}</p>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <Badge variant="default">{item.category}</Badge>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-foreground">
                         {formatCurrency(item.price)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -325,7 +325,7 @@ export function OwnerMenu() {
 
             {filteredItems.length === 0 && (
               <div className="p-12 text-center">
-                <p className="text-white/60">No menu items found</p>
+                <p className="text-muted-foreground">No menu items found</p>
               </div>
             )}
           </Card>
@@ -334,71 +334,71 @@ export function OwnerMenu() {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-[#1a1a1a] border border-white/10 p-6 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl font-bold text-white mb-4">
+          <div className="bg-card border border-border p-6 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold text-foreground mb-4">
               {editingItem ? 'Edit Menu Item' : 'Add Menu Item'}
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-white/60 mb-2">Name</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Name</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none placeholder-white/20"
+                    className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none placeholder-muted-foreground"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-2">Price</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Price</label>
                   <input
                     type="number"
                     step="0.01"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-2">Category</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Category</label>
                   <input
                     type="text"
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-2">Vegetarian</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Vegetarian</label>
                   <div className="flex items-center h-10">
                     <input
                       type="checkbox"
                       checked={formData.isVegetarian}
                       onChange={(e) => setFormData({ ...formData, isVegetarian: e.target.checked })}
-                      className="w-4 h-4 text-[#FF6B35] bg-white/5 border-white/10 rounded focus:ring-[#FF6B35]"
+                      className="w-4 h-4 text-[#FF6B35] bg-muted/50 border-border rounded focus:ring-[#FF6B35]"
                     />
-                    <label className="ml-2 text-sm text-white/60">This item is vegetarian</label>
+                    <label className="ml-2 text-sm text-muted-foreground">This item is vegetarian</label>
                   </div>
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-white/60 mb-2">Description</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Description</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none placeholder-white/20"
+                    className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none placeholder-muted-foreground"
                     rows="3"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-white/60 mb-2">Image URL</label>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Image URL</label>
                   <input
                     type="text"
                     value={formData.imageUrl}
                     onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent outline-none placeholder-white/20"
+                    className="w-full px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none placeholder-muted-foreground"
                     placeholder="https://..."
                   />
                 </div>

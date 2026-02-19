@@ -113,15 +113,15 @@ export function AdminOrders() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AdminNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">Order Management</h1>
-            <p className="text-white/60">Monitor all platform orders</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Order Management</h1>
+            <p className="text-muted-foreground">Monitor all platform orders</p>
           </div>
           <Button onClick={handleExport} variant="outline" className="gap-2">
             <Download size={18} />
@@ -132,23 +132,23 @@ export function AdminOrders() {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
           <Card className="p-4">
-            <p className="text-sm text-white/60 mb-1">Total Orders</p>
-            <p className="text-2xl font-bold text-white">{stats.total}</p>
+            <p className="text-sm text-muted-foreground mb-1">Total Orders</p>
+            <p className="text-2xl font-bold text-foreground">{stats.total}</p>
           </Card>
           <Card className="p-4">
-            <p className="text-sm text-white/60 mb-1">Active</p>
+            <p className="text-sm text-muted-foreground mb-1">Active</p>
             <p className="text-2xl font-bold text-[#F59E0B]">{stats.active}</p>
           </Card>
           <Card className="p-4">
-            <p className="text-sm text-white/60 mb-1">Delivered</p>
+            <p className="text-sm text-muted-foreground mb-1">Delivered</p>
             <p className="text-2xl font-bold text-[#10B981]">{stats.delivered}</p>
           </Card>
           <Card className="p-4">
-            <p className="text-sm text-white/60 mb-1">Cancelled</p>
+            <p className="text-sm text-muted-foreground mb-1">Cancelled</p>
             <p className="text-2xl font-bold text-[#EF4444]">{stats.cancelled}</p>
           </Card>
           <Card className="p-4">
-            <p className="text-sm text-white/60 mb-1">Revenue</p>
+            <p className="text-sm text-muted-foreground mb-1">Revenue</p>
             <p className="text-2xl font-bold text-[#10B981]">{formatCurrency(stats.revenue)}</p>
           </Card>
         </div>
@@ -159,7 +159,7 @@ export function AdminOrders() {
             {/* Search */}
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/40" size={20} />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
                 <Input
                   type="text"
                   placeholder="Search by order ID or address..."
@@ -176,20 +176,20 @@ export function AdminOrders() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B35]"
+                className="px-4 py-2 bg-input border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                <option className="bg-[#1a1a1a]" value="ALL">All Status</option>
-                <option className="bg-[#1a1a1a]" value="PENDING">Pending</option>
-                <option className="bg-[#1a1a1a]" value="CONFIRMED">Confirmed</option>
-                <option className="bg-[#1a1a1a]" value="PREPARING">Preparing</option>
-                <option className="bg-[#1a1a1a]" value="READY_FOR_PICKUP">Ready for Pickup</option>
-                <option className="bg-[#1a1a1a]" value="OUT_FOR_DELIVERY">Out for Delivery</option>
-                <option className="bg-[#1a1a1a]" value="DELIVERED">Delivered</option>
-                <option className="bg-[#1a1a1a]" value="CANCELLED">Cancelled</option>
+                <option className="bg-card" value="ALL">All Status</option>
+                <option className="bg-card" value="PENDING">Pending</option>
+                <option className="bg-card" value="CONFIRMED">Confirmed</option>
+                <option className="bg-card" value="PREPARING">Preparing</option>
+                <option className="bg-card" value="READY_FOR_PICKUP">Ready for Pickup</option>
+                <option className="bg-card" value="OUT_FOR_DELIVERY">Out for Delivery</option>
+                <option className="bg-card" value="DELIVERED">Delivered</option>
+                <option className="bg-card" value="CANCELLED">Cancelled</option>
               </select>
             </div>
             <div className="flex items-center gap-2">
-              <Filter size={20} className="text-white/40" />
+              <Filter size={20} className="text-muted-foreground" />
             </div>
           </div>
         </Card>
@@ -198,24 +198,24 @@ export function AdminOrders() {
         <Card>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-white/5 border-b border-white/10">
+              <thead className="bg-muted/50 border-b border-border">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Order ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Restaurant
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Items
                   </th>
                 </tr>
@@ -223,19 +223,19 @@ export function AdminOrders() {
               <tbody className="bg-transparent divide-y divide-white/10">
                 {filteredOrders.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-12 text-center text-white/60">
-                      <ShoppingBag className="w-12 h-12 mx-auto mb-2 text-white/20" />
+                    <td colSpan="6" className="px-6 py-12 text-center text-muted-foreground">
+                      <ShoppingBag className="w-12 h-12 mx-auto mb-2 text-muted-foreground/40" />
                       <p>No orders found</p>
                     </td>
                   </tr>
                 ) : (
                   filteredOrders.map((order) => (
-                    <tr key={order.id} className="hover:bg-white/5 transition-colors">
+                    <tr key={order.id} className="hover:bg-muted/50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-[#FF6B35]">#{order.id}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-white">Restaurant #{order.restaurantId}</div>
+                        <div className="text-sm text-foreground">Restaurant #{order.restaurantId}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <Badge variant={getStatusBadgeVariant(order.status)}>
@@ -243,17 +243,17 @@ export function AdminOrders() {
                         </Badge>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-white">
+                        <div className="text-sm font-medium text-foreground">
                           {formatCurrency(order.totalAmount || 0)}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                         {new Date(order.createdAt).toLocaleDateString()}
-                        <div className="text-xs text-white/40">
+                        <div className="text-xs text-muted-foreground">
                           {new Date(order.createdAt).toLocaleTimeString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                         {order.items?.length || 0} items
                       </td>
                     </tr>

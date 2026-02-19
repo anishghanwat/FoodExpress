@@ -106,23 +106,23 @@ export function AgentHistory() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f]">
+      <div className="min-h-screen bg-background">
         <AgentNav />
         <div className="flex items-center justify-center h-96">
-          <div className="text-white/60">Loading...</div>
+          <div className="text-muted-foreground">Loading...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AgentNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Delivery History</h1>
-          <p className="text-white/60">View your completed deliveries</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Delivery History</h1>
+          <p className="text-muted-foreground">View your completed deliveries</p>
         </div>
 
         {/* Stats Cards */}
@@ -131,7 +131,7 @@ export function AgentHistory() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-blue-400 font-medium">Total Deliveries</p>
-                <p className="text-2xl font-bold text-white mt-1">{stats.total}</p>
+                <p className="text-2xl font-bold text-foreground mt-1">{stats.total}</p>
               </div>
               <Package className="w-10 h-10 text-blue-400" />
             </div>
@@ -141,7 +141,7 @@ export function AgentHistory() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-emerald-400 font-medium">Total Earnings</p>
-                <p className="text-2xl font-bold text-white mt-1">{formatCurrency(stats.totalEarnings)}</p>
+                <p className="text-2xl font-bold text-foreground mt-1">{formatCurrency(stats.totalEarnings)}</p>
               </div>
               <IndianRupee className="w-10 h-10 text-emerald-400" />
             </div>
@@ -151,7 +151,7 @@ export function AgentHistory() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-amber-400 font-medium">Avg per Delivery</p>
-                <p className="text-2xl font-bold text-white mt-1">{formatCurrency(stats.avgEarnings)}</p>
+                <p className="text-2xl font-bold text-foreground mt-1">{formatCurrency(stats.avgEarnings)}</p>
               </div>
               <IndianRupee className="w-10 h-10 text-amber-400" />
             </div>
@@ -166,7 +166,7 @@ export function AgentHistory() {
               onClick={() => setDateFilter(filter)}
               className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition ${dateFilter === filter
                 ? 'bg-emerald-600 text-white'
-                : 'bg-white/5 text-white/60 hover:bg-white/10'
+                : 'bg-muted/50 text-muted-foreground hover:bg-muted'
                 }`}
             >
               {filter === 'all' ? 'All Time' : filter.charAt(0).toUpperCase() + filter.slice(1)}
@@ -177,9 +177,9 @@ export function AgentHistory() {
         {/* Deliveries List */}
         {filteredDeliveries.length === 0 ? (
           <Card className="p-12 text-center">
-            <Calendar className="w-16 h-16 text-white/20 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No Deliveries Found</h3>
-            <p className="text-white/60">Complete deliveries to see them here</p>
+            <Calendar className="w-16 h-16 text-muted-foreground/40 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-foreground mb-2">No Deliveries Found</h3>
+            <p className="text-muted-foreground">Complete deliveries to see them here</p>
           </Card>
         ) : (
           <div className="space-y-4">
@@ -188,7 +188,7 @@ export function AgentHistory() {
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <h3 className="text-lg font-bold text-white">
+                      <h3 className="text-lg font-bold text-foreground">
                         Order #{delivery.orderId}
                       </h3>
                       <Badge variant="success">Delivered</Badge>
@@ -198,29 +198,29 @@ export function AgentHistory() {
                       <div className="flex items-start gap-2">
                         <MapPin className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-medium text-white">Pickup</p>
-                          <p className="text-white/60">{delivery.pickupAddress}</p>
+                          <p className="font-medium text-foreground">Pickup</p>
+                          <p className="text-muted-foreground">{delivery.pickupAddress}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-2">
                         <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-medium text-white">Delivery</p>
-                          <p className="text-white/60">{delivery.deliveryAddress}</p>
+                          <p className="font-medium text-foreground">Delivery</p>
+                          <p className="text-muted-foreground">{delivery.deliveryAddress}</p>
                         </div>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-white/40" />
-                        <span className="text-white/60">
+                        <Clock className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">
                           {formatDate(delivery.deliveryTime)}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-white/40" />
-                        <span className="text-white/60">
+                        <Clock className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">
                           Duration: {getTimeTaken(delivery.pickupTime, delivery.deliveryTime)}
                         </span>
                       </div>
@@ -228,7 +228,7 @@ export function AgentHistory() {
                   </div>
 
                   <div className="text-right">
-                    <p className="text-sm text-white/60 mb-1">Earned</p>
+                    <p className="text-sm text-muted-foreground mb-1">Earned</p>
                     <p className="text-2xl font-bold text-emerald-400">
                       {formatCurrency(delivery.deliveryFee || delivery.order?.deliveryFee || 2.99)}
                     </p>

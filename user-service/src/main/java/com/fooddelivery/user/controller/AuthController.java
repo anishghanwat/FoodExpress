@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    
+
     private final AuthService authService;
-    
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody RegisterRequest request) {
         try {
@@ -27,18 +27,22 @@ public class AuthController {
                     .body(ApiResponse.error(e.getMessage()));
         }
     }
-    
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest request) {
         try {
             AuthResponse response = authService.login(request);
             return ResponseEntity.ok(ApiResponse.success(response, "Login successful"));
         } catch (Exception e) {
+            if ("User not found".equals(e.getMessage())) {
+                return ResponseEntity.badRequest()
+                        .body(ApiResponse.error("User not found"));
+            }
             return ResponseEntity.badRequest()
                     .body(ApiResponse.error("Invalid email or password"));
         }
     }
-    
+
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<Void>> logout() {
         return ResponseEntity.ok(ApiResponse.success(null, "Logout successful"));

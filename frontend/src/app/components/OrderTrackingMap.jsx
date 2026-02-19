@@ -86,11 +86,11 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
 
     if (loading) {
         return (
-            <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-bold text-[#1F2937] mb-4">Live Tracking</h3>
-                <div className="bg-gray-100 rounded-lg h-96 flex items-center justify-center">
-                    <div className="text-center text-[#6B7280]">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF6B35] mx-auto mb-4"></div>
+            <div className="bg-card border border-border rounded-lg shadow-md p-6">
+                <h3 className="text-xl font-bold text-card-foreground mb-4">Live Tracking</h3>
+                <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
+                    <div className="text-center text-muted-foreground">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                         <p>Loading map...</p>
                     </div>
                 </div>
@@ -100,14 +100,14 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
 
     if (error) {
         return (
-            <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-bold text-[#1F2937] mb-4">Live Tracking</h3>
-                <div className="bg-red-50 rounded-lg h-96 flex items-center justify-center">
-                    <div className="text-center text-red-600">
+            <div className="bg-card border border-border rounded-lg shadow-md p-6">
+                <h3 className="text-xl font-bold text-card-foreground mb-4">Live Tracking</h3>
+                <div className="bg-destructive/10 rounded-lg h-96 flex items-center justify-center">
+                    <div className="text-center text-destructive">
                         <p className="font-medium">{error}</p>
                         <button
                             onClick={loadDeliveryLocation}
-                            className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                            className="mt-4 px-4 py-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90"
                         >
                             Retry
                         </button>
@@ -118,10 +118,10 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
     }
 
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-card border border-border rounded-lg shadow-md overflow-hidden">
             <div className="p-6 pb-0">
                 <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-[#1F2937]">Live Tracking</h3>
+                    <h3 className="text-xl font-bold text-card-foreground">Live Tracking</h3>
                     <div className="flex items-center gap-2 text-sm text-[#10B981]">
                         <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
                         <span>Live</span>
@@ -151,7 +151,7 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
             {/* Info Box */}
             {(distance !== null || eta !== null) && (
                 <div className="p-6 pt-4">
-                    <div className="bg-gradient-to-r from-[#FF6B35] to-[#ff8a5c] rounded-lg p-4 text-white">
+                    <div className="bg-gradient-to-r from-primary to-primary/80 rounded-lg p-4 text-primary-foreground">
                         <div className="grid grid-cols-2 gap-4">
                             {distance !== null && (
                                 <div className="flex items-center gap-3">
@@ -180,14 +180,14 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
                     </div>
 
                     {deliveryInfo.status === 'PICKED_UP' && (
-                        <div className="mt-4 flex items-start gap-2 text-sm text-[#6B7280]">
+                        <div className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
                             <MapPin size={16} className="flex-shrink-0 mt-0.5" />
                             <p>Your delivery agent has picked up your order and is on the way!</p>
                         </div>
                     )}
 
                     {deliveryInfo.status === 'IN_TRANSIT' && (
-                        <div className="mt-4 flex items-start gap-2 text-sm text-[#6B7280]">
+                        <div className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
                             <MapPin size={16} className="flex-shrink-0 mt-0.5" />
                             <p>Your order is on the way. The agent will arrive soon!</p>
                         </div>
@@ -204,7 +204,7 @@ export function OrderTrackingMap({ orderId, deliveryInfo, restaurantLocation, cu
 
             {/* Auto-refresh indicator */}
             <div className="px-6 pb-4">
-                <p className="text-xs text-[#6B7280] text-center">
+                <p className="text-xs text-muted-foreground text-center">
                     Location updates automatically every 15 seconds
                 </p>
             </div>

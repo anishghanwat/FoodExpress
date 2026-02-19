@@ -10,6 +10,7 @@ import orderService from '../services/orderService';
 import paymentService from '../services/paymentService';
 import { formatCurrency } from '../utils/helpers';
 import { toast } from 'sonner';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function Checkout() {
   const navigate = useNavigate();
@@ -175,21 +176,21 @@ export function Checkout() {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex flex-col items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
         <div className="text-center max-w-sm">
           {/* Animated cart icon */}
-          <div className="w-24 h-24 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-            <ShoppingCart size={40} className="text-white/20" />
+          <div className="w-24 h-24 bg-muted/20 border border-border rounded-3xl flex items-center justify-center mx-auto mb-6">
+            <ShoppingCart size={40} className="text-muted-foreground" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Your cart is empty</h2>
-          <p className="text-white/40 text-sm mb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-2">Your cart is empty</h2>
+          <p className="text-muted-foreground text-sm mb-8">
             Looks like you haven't added anything yet. Browse restaurants and find something delicious!
           </p>
           <Link to="/restaurants">
             <Button className="px-8">Browse Restaurants</Button>
           </Link>
           <div className="mt-4">
-            <button onClick={() => navigate(-1)} className="text-white/30 text-sm hover:text-white/60 transition-colors">
+            <button onClick={() => navigate(-1)} className="text-muted-foreground text-sm hover:text-foreground transition-colors">
               ← Go back
             </button>
           </div>
@@ -199,22 +200,22 @@ export function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
-      <div className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+    <div className="min-h-screen bg-background">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
             >
               <ArrowLeft size={18} />
               Back
             </button>
-            <h1 className="text-lg font-bold text-white">Checkout</h1>
-            <div className="w-20"></div>
+            <h1 className="text-lg font-bold text-foreground">Checkout</h1>
+            <div className="w-20 flex justify-end"><ThemeToggle /></div>
           </div>
         </div>
-      </div>
+      </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -222,10 +223,10 @@ export function Checkout() {
             <Card>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-9 h-9 bg-[#FF6B35] rounded-xl flex items-center justify-center">
-                    <MapPin size={18} className="text-white" />
+                  <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
+                    <MapPin size={18} className="text-primary" />
                   </div>
-                  <h2 className="text-lg font-bold text-white">Delivery Address</h2>
+                  <h2 className="text-lg font-bold text-foreground">Delivery Address</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -249,10 +250,10 @@ export function Checkout() {
             <Card>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-9 h-9 bg-[#FF6B35] rounded-xl flex items-center justify-center">
-                    <CreditCard size={18} className="text-white" />
+                  <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
+                    <CreditCard size={18} className="text-primary" />
                   </div>
-                  <h2 className="text-lg font-bold text-white">Payment Method</h2>
+                  <h2 className="text-lg font-bold text-foreground">Payment Method</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -260,26 +261,26 @@ export function Checkout() {
                     type="button"
                     onClick={() => setFormData({ ...formData, paymentMethod: 'CARD' })}
                     className={`p-4 border rounded-xl transition-all text-left ${formData.paymentMethod === 'CARD'
-                      ? 'border-[#FF6B35] bg-[#FF6B35]/10'
-                      : 'border-white/15 bg-white/5 hover:border-white/30'
+                      ? 'border-primary bg-primary/10'
+                      : 'border-border bg-muted/20 hover:border-muted-foreground/30'
                       }`}
                   >
-                    <CreditCard className="mb-2 text-white/70" size={22} />
-                    <div className="font-medium text-white">Online Payment</div>
-                    <div className="text-xs text-white/40 mt-1">Debit/Credit Card, UPI, NetBanking</div>
+                    <CreditCard className="mb-2 text-muted-foreground" size={22} />
+                    <div className="font-medium text-foreground">Online Payment</div>
+                    <div className="text-xs text-muted-foreground mt-1">Debit/Credit Card, UPI, NetBanking</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, paymentMethod: 'CASH' })}
                     className={`p-4 border rounded-xl transition-all text-left ${formData.paymentMethod === 'CASH'
-                      ? 'border-[#FF6B35] bg-[#FF6B35]/10'
-                      : 'border-white/15 bg-white/5 hover:border-white/30'
+                      ? 'border-primary bg-primary/10'
+                      : 'border-border bg-muted/20 hover:border-muted-foreground/30'
                       }`}
                   >
-                    <IndianRupee className="mb-2 text-white/70" size={22} />
-                    <div className="font-medium text-white">Cash on Delivery</div>
-                    <div className="text-xs text-white/40 mt-1">Pay when you receive</div>
+                    <IndianRupee className="mb-2 text-muted-foreground" size={22} />
+                    <div className="font-medium text-foreground">Cash on Delivery</div>
+                    <div className="text-xs text-muted-foreground mt-1">Pay when you receive</div>
                   </button>
                 </div>
               </div>
@@ -289,61 +290,61 @@ export function Checkout() {
           <div className="lg:col-span-1">
             <Card className="sticky top-24">
               <div className="p-6">
-                <h2 className="text-lg font-bold text-white mb-5">Order Summary</h2>
+                <h2 className="text-lg font-bold text-foreground mb-5">Order Summary</h2>
                 <div className="space-y-3 mb-5 max-h-80 overflow-y-auto">
                   {cart?.map(item => (
-                    <div key={item.id} className="flex gap-3 pb-3 border-b border-white/10">
+                    <div key={item.id} className="flex gap-3 pb-3 border-b border-border">
                       <div className="flex-1">
-                        <h4 className="font-medium text-white text-sm mb-1">{item.name}</h4>
-                        <p className="text-sm text-[#FF6B35] font-medium mb-2">{formatCurrency(item.price)}</p>
+                        <h4 className="font-medium text-foreground text-sm mb-1">{item.name}</h4>
+                        <p className="text-sm text-primary font-medium mb-2">{formatCurrency(item.price)}</p>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleUpdateQuantity(item.id, -1)}
-                            className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center hover:border-[#FF6B35] hover:text-[#FF6B35] text-white/60 transition-colors"
+                            className="w-6 h-6 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary text-muted-foreground transition-colors"
                           >
                             <Minus size={12} />
                           </button>
-                          <span className="text-sm font-medium min-w-[1.5rem] text-center text-white">{item.quantity}</span>
+                          <span className="text-sm font-medium min-w-[1.5rem] text-center text-foreground">{item.quantity}</span>
                           <button
                             onClick={() => handleUpdateQuantity(item.id, 1)}
-                            className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center hover:border-[#FF6B35] hover:text-[#FF6B35] text-white/60 transition-colors"
+                            className="w-6 h-6 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary text-muted-foreground transition-colors"
                           >
                             <Plus size={12} />
                           </button>
-                          <button onClick={() => handleRemoveItem(item.id)} className="ml-auto text-white/30 hover:text-[#EF4444] transition-colors">
+                          <button onClick={() => handleRemoveItem(item.id)} className="ml-auto text-muted-foreground/70 hover:text-destructive transition-colors">
                             <Trash2 size={14} />
                           </button>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium text-white text-sm">{formatCurrency(item.price * item.quantity)}</p>
+                        <p className="font-medium text-foreground text-sm">{formatCurrency(item.price * item.quantity)}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="space-y-2 mb-5 pb-5 border-b border-white/10">
-                  <div className="flex justify-between text-sm text-white/50">
+                <div className="space-y-2 mb-5 pb-5 border-b border-border">
+                  <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Subtotal</span><span>{formatCurrency(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-white/50">
+                  <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Delivery Fee</span><span>{formatCurrency(deliveryFee)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-white/50">
+                  <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Tax (8%)</span><span>{formatCurrency(tax)}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between items-center mb-5">
-                  <span className="font-bold text-white">Total</span>
-                  <span className="text-xl font-bold text-[#FF6B35]">{formatCurrency(total)}</span>
+                  <span className="font-bold text-foreground">Total</span>
+                  <span className="text-xl font-bold text-primary">{formatCurrency(total)}</span>
                 </div>
 
                 <Button onClick={handleProceedToPayment} disabled={loading} className="w-full">
                   {loading ? 'Processing...' : formData.paymentMethod === 'CARD' ? 'Proceed to Payment' : 'Place Order'}
                 </Button>
 
-                <p className="text-xs text-white/30 text-center mt-4">
+                <p className="text-xs text-muted-foreground text-center mt-4">
                   By placing this order, you agree to our Terms &amp; Conditions
                 </p>
               </div>

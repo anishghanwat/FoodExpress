@@ -110,30 +110,30 @@ export function AgentDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f]">
+      <div className="min-h-screen bg-background">
         <AgentNav />
         <div className="flex items-center justify-center h-96">
-          <div className="text-white/60">Loading...</div>
+          <div className="text-muted-foreground">Loading...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AgentNav />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             Welcome back, {user.name || 'Agent'}!
           </h1>
-          <p className="text-white/60">Here's your delivery overview</p>
+          <p className="text-muted-foreground">Here's your delivery overview</p>
         </div>
 
         {/* Today's Stats */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-white mb-4">Today's Performance</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-4">Today's Performance</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card className="p-6 bg-gradient-to-br from-[#10B981] to-[#059669]">
               <div className="flex items-center justify-between text-white">
@@ -169,45 +169,45 @@ export function AgentDashboard() {
 
         {/* Overall Stats */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-white mb-4">Overall Statistics</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-4">Overall Statistics</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Card className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-white/60 mb-1">Total Deliveries</p>
-                  <p className="text-2xl font-bold text-white">{stats.totalDeliveries}</p>
+                  <p className="text-sm text-muted-foreground mb-1">Total Deliveries</p>
+                  <p className="text-2xl font-bold text-foreground">{stats.totalDeliveries}</p>
                 </div>
-                <CheckCircle className="w-10 h-10 text-[#10B981]" />
+                <CheckCircle className="w-10 h-10 text-emerald-500" />
               </div>
             </Card>
 
             <Card className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-white/60 mb-1">Total Earnings</p>
-                  <p className="text-2xl font-bold text-white">{formatCurrency(stats.totalEarnings)}</p>
+                  <p className="text-sm text-muted-foreground mb-1">Total Earnings</p>
+                  <p className="text-2xl font-bold text-foreground">{formatCurrency(stats.totalEarnings)}</p>
                 </div>
-                <IndianRupee className="w-10 h-10 text-[#10B981]" />
+                <IndianRupee className="w-10 h-10 text-emerald-500" />
               </div>
             </Card>
 
             <Card className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-white/60 mb-1">Avg Time</p>
-                  <p className="text-2xl font-bold text-white">{stats.avgDeliveryTime} min</p>
+                  <p className="text-sm text-muted-foreground mb-1">Avg Time</p>
+                  <p className="text-2xl font-bold text-foreground">{stats.avgDeliveryTime} min</p>
                 </div>
-                <Clock className="w-10 h-10 text-[#3B82F6]" />
+                <Clock className="w-10 h-10 text-blue-500" />
               </div>
             </Card>
 
             <Card className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-white/60 mb-1">Success Rate</p>
-                  <p className="text-2xl font-bold text-white">{stats.completionRate}%</p>
+                  <p className="text-sm text-muted-foreground mb-1">Success Rate</p>
+                  <p className="text-2xl font-bold text-foreground">{stats.completionRate}%</p>
                 </div>
-                <TrendingUp className="w-10 h-10 text-[#10B981]" />
+                <TrendingUp className="w-10 h-10 text-emerald-500" />
               </div>
             </Card>
           </div>
@@ -215,7 +215,7 @@ export function AgentDashboard() {
 
         {/* Quick Actions */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-white mb-4">Quick Actions</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card
               className="p-6 cursor-pointer hover:shadow-lg transition-shadow"
@@ -223,11 +223,11 @@ export function AgentDashboard() {
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <Package className="w-6 h-6 text-blue-400" />
+                  <Package className="w-6 h-6 text-blue-500" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white">View Queue</p>
-                  <p className="text-sm text-white/60">Accept new deliveries</p>
+                  <p className="font-semibold text-foreground">View Queue</p>
+                  <p className="text-sm text-muted-foreground">Accept new deliveries</p>
                 </div>
               </div>
             </Card>
@@ -238,11 +238,11 @@ export function AgentDashboard() {
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-amber-500/10 rounded-lg">
-                  <Truck className="w-6 h-6 text-amber-400" />
+                  <Truck className="w-6 h-6 text-amber-500" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white">Active Deliveries</p>
-                  <p className="text-sm text-white/60">{stats.activeDeliveries} in progress</p>
+                  <p className="font-semibold text-foreground">Active Deliveries</p>
+                  <p className="text-sm text-muted-foreground">{stats.activeDeliveries} in progress</p>
                 </div>
               </div>
             </Card>
@@ -253,11 +253,11 @@ export function AgentDashboard() {
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-emerald-500/10 rounded-lg">
-                  <CheckCircle className="w-6 h-6 text-emerald-400" />
+                  <CheckCircle className="w-6 h-6 text-emerald-500" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white">View History</p>
-                  <p className="text-sm text-white/60">{stats.totalDeliveries} completed</p>
+                  <p className="font-semibold text-foreground">View History</p>
+                  <p className="text-sm text-muted-foreground">{stats.totalDeliveries} completed</p>
                 </div>
               </div>
             </Card>
@@ -268,10 +268,10 @@ export function AgentDashboard() {
         {recentDeliveries.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white">Recent Deliveries</h2>
+              <h2 className="text-lg font-semibold text-foreground">Recent Deliveries</h2>
               <button
                 onClick={() => navigate('/agent/history')}
-                className="text-sm text-blue-400 hover:text-blue-300 font-medium"
+                className="text-sm text-primary hover:text-primary/80 font-medium"
               >
                 View All →
               </button>
@@ -286,7 +286,7 @@ export function AgentDashboard() {
                       </div>
                       <div>
                         <p className="font-medium text-white">Order #{delivery.orderId}</p>
-                        <p className="text-sm text-white/60">
+                        <p className="text-sm text-muted-foreground">
                           {formatDate(delivery.deliveryTime)} • {getTimeTaken(delivery.pickupTime, delivery.deliveryTime)}
                         </p>
                       </div>

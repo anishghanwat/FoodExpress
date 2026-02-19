@@ -5,11 +5,12 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
-import NotificationBell from '../components/NotificationBell';
+
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import restaurantService from '../services/restaurantService';
 import { formatCurrency } from '../utils/helpers';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function RestaurantList() {
   const navigate = useNavigate();
@@ -81,25 +82,26 @@ export function RestaurantList() {
   const totalItems = cart?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       {/* Top Navigation */}
-      <nav className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-[#FF6B35] rounded-lg flex items-center justify-center">
-                <span className="text-white text-xs font-bold">F</span>
+              <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground text-xs font-bold">F</span>
               </div>
-              <Link to="/" className="text-xl font-bold text-white hover:text-[#FF6B35] transition-colors">FoodExpress</Link>
+              <Link to="/" className="text-xl font-bold text-foreground hover:text-primary transition-colors">FoodExpress</Link>
             </div>
 
             <div className="flex items-center gap-3">
+              <ThemeToggle />
               {user ? (
                 <>
-                  <Link to="/orders/history" className="text-white/60 hover:text-white text-sm transition-colors">
+                  <Link to="/orders/history" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
                     My Orders
                   </Link>
-                  <NotificationBell />
+
                   <Link to="/checkout" className="relative">
                     <Button variant="outline" className="flex items-center gap-2 text-sm">
                       <ShoppingCart size={16} />
@@ -116,17 +118,17 @@ export function RestaurantList() {
                       <User size={16} />
                       {user?.name}
                     </Button>
-                    <div className="absolute right-0 mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                    <div className="absolute right-0 mt-2 w-48 bg-popover border border-border rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                       <Link
                         to="/profile"
-                        className="w-full text-left px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 flex items-center gap-2 transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-accent flex items-center gap-2 transition-colors"
                       >
                         <User size={14} />
                         My Profile
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 flex items-center gap-2 transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-accent flex items-center gap-2 transition-colors"
                       >
                         <LogOut size={14} />
                         Logout
@@ -162,13 +164,13 @@ export function RestaurantList() {
         <div className="mb-8">
           <div className="flex gap-3">
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30" size={18} />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={18} />
               <input
                 type="text"
                 placeholder="Search restaurants or cuisines..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-white/7 border border-white/15 text-white placeholder-white/30 rounded-xl focus:ring-2 focus:ring-[#FF6B35]/50 focus:border-[#FF6B35]/60 outline-none transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-muted/50 border border-input text-foreground placeholder-muted-foreground rounded-xl focus:ring-2 focus:ring-ring/50 focus:border-ring outline-none transition-all"
               />
             </div>
             <Button
@@ -185,10 +187,10 @@ export function RestaurantList() {
         <div className="flex gap-8">
           {/* Filters Sidebar */}
           <div className={`${showFilters ? 'block' : 'hidden'} lg:block w-64 flex-shrink-0`}>
-            <Card className="sticky top-24">
+            <Card className="sticky top-24 bg-card border-border">
               <div className="p-5 space-y-5">
                 <div className="flex justify-between items-center">
-                  <h3 className="font-semibold text-white">Filters</h3>
+                  <h3 className="font-semibold text-foreground">Filters</h3>
                   <button onClick={clearFilters} className="text-sm text-[#FF6B35] hover:text-[#ff8a5c] transition-colors">
                     Clear All
                   </button>
@@ -196,7 +198,7 @@ export function RestaurantList() {
 
                 {/* Cuisine Type */}
                 <div>
-                  <h4 className="text-sm font-medium text-white/60 mb-3">Cuisine Type</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-3">Cuisine Type</h4>
                   <div className="space-y-2">
                     {cuisineTypes.map(cuisine => (
                       <label key={cuisine} className="flex items-center cursor-pointer">
@@ -204,9 +206,9 @@ export function RestaurantList() {
                           type="checkbox"
                           checked={filters.cuisineType.includes(cuisine)}
                           onChange={() => handleCuisineToggle(cuisine)}
-                          className="w-4 h-4 accent-[#FF6B35] rounded"
+                          className="w-4 h-4 accent-primary rounded"
                         />
-                        <span className="ml-2 text-sm text-white/70">{cuisine}</span>
+                        <span className="ml-2 text-sm text-foreground/70">{cuisine}</span>
                       </label>
                     ))}
                   </div>
@@ -214,32 +216,32 @@ export function RestaurantList() {
 
                 {/* Rating */}
                 <div>
-                  <h4 className="text-sm font-medium text-white/60 mb-3">Minimum Rating</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-3">Minimum Rating</h4>
                   <input
                     type="range" min="0" max="5" step="0.5"
                     value={filters.minRating}
                     onChange={(e) => setFilters({ ...filters, minRating: parseFloat(e.target.value) })}
-                    className="w-full accent-[#FF6B35]"
+                    className="w-full accent-primary"
                   />
-                  <div className="flex justify-between text-xs text-white/40 mt-1">
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>0</span>
-                    <span className="text-[#FF6B35]">{filters.minRating}+</span>
+                    <span className="text-primary">{filters.minRating}+</span>
                     <span>5</span>
                   </div>
                 </div>
 
                 {/* Delivery Time */}
                 <div>
-                  <h4 className="text-sm font-medium text-white/60 mb-3">Max Delivery Time</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground mb-3">Max Delivery Time</h4>
                   <input
                     type="range" min="15" max="60" step="5"
                     value={filters.maxDeliveryTime}
                     onChange={(e) => setFilters({ ...filters, maxDeliveryTime: parseInt(e.target.value) })}
-                    className="w-full accent-[#FF6B35]"
+                    className="w-full accent-primary"
                   />
-                  <div className="flex justify-between text-xs text-white/40 mt-1">
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
                     <span>15 min</span>
-                    <span className="text-[#FF6B35]">{filters.maxDeliveryTime} min</span>
+                    <span className="text-primary">{filters.maxDeliveryTime} min</span>
                     <span>60 min</span>
                   </div>
                 </div>
@@ -250,9 +252,9 @@ export function RestaurantList() {
                     type="checkbox"
                     checked={filters.onlyOpen}
                     onChange={(e) => setFilters({ ...filters, onlyOpen: e.target.checked })}
-                    className="w-4 h-4 accent-[#FF6B35] rounded"
+                    className="w-4 h-4 accent-primary rounded"
                   />
-                  <span className="ml-2 text-sm text-white/70">Only Open Restaurants</span>
+                  <span className="ml-2 text-sm text-foreground/70">Only Open Restaurants</span>
                 </label>
               </div>
             </Card>
@@ -263,7 +265,7 @@ export function RestaurantList() {
             {/* Featured Restaurants */}
             {featuredRestaurants.length > 0 && (
               <div className="mb-8">
-                <h2 className="text-lg font-bold text-white mb-4">Featured Restaurants</h2>
+                <h2 className="text-lg font-bold text-foreground mb-4">Featured Restaurants</h2>
                 <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
                   {featuredRestaurants.map(restaurant => (
                     <Link
@@ -278,17 +280,17 @@ export function RestaurantList() {
                           className="w-full h-40 object-cover"
                         />
                         <div className="p-4">
-                          <h3 className="font-bold text-white mb-1">{restaurant.name}</h3>
-                          <p className="text-sm text-white/50 mb-2">{restaurant.cuisineType}</p>
+                          <h3 className="font-bold text-foreground mb-1">{restaurant.name}</h3>
+                          <p className="text-sm text-muted-foreground mb-2">{restaurant.cuisineType}</p>
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1">
                               <Star size={14} className="text-[#F59E0B] fill-current" />
                               <span className="text-sm font-medium text-white">{restaurant.rating}</span>
                             </div>
-                            <span className="text-white/20">•</span>
+                            <span className="text-muted-foreground/30">•</span>
                             <div className="flex items-center gap-1">
-                              <Clock size={14} className="text-white/40" />
-                              <span className="text-sm text-white/60">{restaurant.deliveryTime} min</span>
+                              <Clock size={14} className="text-muted-foreground" />
+                              <span className="text-sm text-muted-foreground/80">{restaurant.deliveryTime} min</span>
                             </div>
                           </div>
                         </div>
@@ -301,16 +303,16 @@ export function RestaurantList() {
 
             {/* All Restaurants */}
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold text-white">
+              <h2 className="text-lg font-bold text-foreground">
                 {filteredRestaurants.length} restaurants found
               </h2>
               <select
                 value={filters.sortBy}
                 onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-                className="px-3 py-2 bg-white/7 border border-white/15 text-white rounded-lg focus:ring-2 focus:ring-[#FF6B35]/50 outline-none text-sm"
+                className="px-3 py-2 bg-muted/50 border border-input text-foreground rounded-lg focus:ring-2 focus:ring-ring/50 outline-none text-sm"
               >
-                <option value="rating" className="bg-[#1a1a1a]">Sort by Rating</option>
-                <option value="deliveryTime" className="bg-[#1a1a1a]">Sort by Delivery Time</option>
+                <option value="rating" className="bg-popover text-foreground">Sort by Rating</option>
+                <option value="deliveryTime" className="bg-popover text-foreground">Sort by Delivery Time</option>
               </select>
             </div>
 
@@ -338,18 +340,18 @@ export function RestaurantList() {
                         )}
                       </div>
                       <div className="p-4">
-                        <h3 className="font-bold text-white mb-1">{restaurant.name}</h3>
-                        <p className="text-sm text-white/50 mb-3">{restaurant.cuisineType}</p>
+                        <h3 className="font-bold text-foreground mb-1">{restaurant.name}</h3>
+                        <p className="text-sm text-muted-foreground mb-3">{restaurant.cuisineType}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
                             <Star size={14} className="text-[#F59E0B] fill-current" />
-                            <span className="text-sm font-medium text-white">{restaurant.rating}</span>
+                            <span className="text-sm font-medium text-foreground">{restaurant.rating}</span>
                           </div>
-                          <div className="flex items-center gap-1 text-white/50">
+                          <div className="flex items-center gap-1 text-muted-foreground">
                             <Clock size={14} />
                             <span className="text-sm">{restaurant.deliveryTime} min</span>
                           </div>
-                          <div className="flex items-center gap-1 text-white/50">
+                          <div className="flex items-center gap-1 text-muted-foreground">
                             <IndianRupee size={14} />
                             <span className="text-sm">{formatCurrency(restaurant.deliveryFee)}</span>
                           </div>
@@ -363,7 +365,7 @@ export function RestaurantList() {
 
             {!loading && filteredRestaurants.length === 0 && (
               <div className="text-center py-16">
-                <p className="text-white/40 mb-4">No restaurants found matching your criteria</p>
+                <p className="text-muted-foreground mb-4">No restaurants found matching your criteria</p>
                 <Button onClick={clearFilters} variant="outline">Clear Filters</Button>
               </div>
             )}

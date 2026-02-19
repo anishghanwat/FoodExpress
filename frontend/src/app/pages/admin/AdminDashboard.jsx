@@ -93,24 +93,24 @@ export function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F9FAFB] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#FF6B35] mx-auto mb-4"></div>
-          <p className="text-[#6B7280]">Loading dashboard...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       <AdminNav />
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Admin Dashboard</h1>
-            <p className="text-white/60">System overview and monitoring</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Admin Dashboard</h1>
+            <p className="text-muted-foreground">System overview and monitoring</p>
           </div>
 
           {/* Stats Cards */}
@@ -119,12 +119,12 @@ export function AdminDashboard() {
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="bg-blue-50 text-blue-600 p-3 rounded-lg">
+                    <div className="bg-blue-500/10 text-blue-600 dark:text-blue-400 p-3 rounded-lg">
                       <Users size={24} />
                     </div>
                   </div>
-                  <p className="text-white/60 text-sm mb-1">Total Users</p>
-                  <p className="text-3xl font-bold text-white">{stats.totalUsers}</p>
+                  <p className="text-muted-foreground text-sm mb-1">Total Users</p>
+                  <p className="text-3xl font-bold text-foreground">{stats.totalUsers}</p>
                 </div>
               </Card>
             </Link>
@@ -133,12 +133,12 @@ export function AdminDashboard() {
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="bg-purple-50 text-purple-600 p-3 rounded-lg">
+                    <div className="bg-purple-500/10 text-purple-600 dark:text-purple-400 p-3 rounded-lg">
                       <Store size={24} />
                     </div>
                   </div>
-                  <p className="text-white/60 text-sm mb-1">Total Restaurants</p>
-                  <p className="text-3xl font-bold text-white">{stats.totalRestaurants}</p>
+                  <p className="text-muted-foreground text-sm mb-1">Total Restaurants</p>
+                  <p className="text-3xl font-bold text-foreground">{stats.totalRestaurants}</p>
                 </div>
               </Card>
             </Link>
@@ -147,12 +147,12 @@ export function AdminDashboard() {
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="bg-amber-50 text-amber-600 p-3 rounded-lg">
+                    <div className="bg-amber-500/10 text-amber-600 dark:text-amber-400 p-3 rounded-lg">
                       <ShoppingBag size={24} />
                     </div>
                   </div>
-                  <p className="text-white/60 text-sm mb-1">Active Orders</p>
-                  <p className="text-3xl font-bold text-white">{stats.activeOrders}</p>
+                  <p className="text-muted-foreground text-sm mb-1">Active Orders</p>
+                  <p className="text-3xl font-bold text-foreground">{stats.activeOrders}</p>
                 </div>
               </Card>
             </Link>
@@ -160,11 +160,11 @@ export function AdminDashboard() {
             <Card>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="bg-green-50 text-green-600 p-3 rounded-lg">
+                  <div className="bg-green-500/10 text-green-600 dark:text-green-400 p-3 rounded-lg">
                     <IndianRupee size={24} />
                   </div>
                 </div>
-                <p className="text-white/60 text-sm mb-1">Total Revenue</p>
+                <p className="text-muted-foreground text-sm mb-1">Total Revenue</p>
                 <p className="text-3xl font-bold text-green-600">{formatCurrency(stats.totalRevenue)}</p>
               </div>
             </Card>
@@ -173,37 +173,37 @@ export function AdminDashboard() {
           {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Link to="/admin/users">
-              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-[#FF6B35]">
+              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-primary">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-white mb-1">Manage Users</h3>
-                    <p className="text-sm text-white/60">View and manage all users</p>
+                    <h3 className="font-bold text-foreground mb-1">Manage Users</h3>
+                    <p className="text-sm text-muted-foreground">View and manage all users</p>
                   </div>
-                  <ArrowRight className="text-[#FF6B35]" size={24} />
+                  <ArrowRight className="text-primary" size={24} />
                 </div>
               </Card>
             </Link>
 
             <Link to="/admin/restaurants">
-              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-[#FF6B35]">
+              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-primary">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-white mb-1">Manage Restaurants</h3>
-                    <p className="text-sm text-white/60">Approve and monitor restaurants</p>
+                    <h3 className="font-bold text-foreground mb-1">Manage Restaurants</h3>
+                    <p className="text-sm text-muted-foreground">Approve and monitor restaurants</p>
                   </div>
-                  <ArrowRight className="text-[#FF6B35]" size={24} />
+                  <ArrowRight className="text-primary" size={24} />
                 </div>
               </Card>
             </Link>
 
             <Link to="/admin/orders">
-              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-[#FF6B35]">
+              <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-primary">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-white mb-1">Monitor Orders</h3>
-                    <p className="text-sm text-white/60">Track all platform orders</p>
+                    <h3 className="font-bold text-foreground mb-1">Monitor Orders</h3>
+                    <p className="text-sm text-muted-foreground">Track all platform orders</p>
                   </div>
-                  <ArrowRight className="text-[#FF6B35]" size={24} />
+                  <ArrowRight className="text-primary" size={24} />
                 </div>
               </Card>
             </Link>
@@ -213,31 +213,31 @@ export function AdminDashboard() {
           {Object.keys(stats.usersByRole).length > 0 && (
             <Card>
               <div className="p-6">
-                <h2 className="text-xl font-bold text-white mb-6">Users by Role</h2>
+                <h2 className="text-xl font-bold text-foreground mb-6">Users by Role</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   <div className="text-center">
-                    <p className="text-4xl font-bold text-[#3B82F6] mb-2">
+                    <p className="text-4xl font-bold text-blue-500 mb-2">
                       {stats.usersByRole.CUSTOMER || 0}
                     </p>
-                    <p className="text-sm text-white/60">Customers</p>
+                    <p className="text-sm text-muted-foreground">Customers</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-4xl font-bold text-[#F59E0B] mb-2">
+                    <p className="text-4xl font-bold text-amber-500 mb-2">
                       {stats.usersByRole.RESTAURANT_OWNER || 0}
                     </p>
-                    <p className="text-sm text-white/60">Restaurant Owners</p>
+                    <p className="text-sm text-muted-foreground">Restaurant Owners</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-4xl font-bold text-[#10B981] mb-2">
+                    <p className="text-4xl font-bold text-emerald-500 mb-2">
                       {stats.usersByRole.DELIVERY_AGENT || 0}
                     </p>
-                    <p className="text-sm text-white/60">Delivery Agents</p>
+                    <p className="text-sm text-muted-foreground">Delivery Agents</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-4xl font-bold text-[#EF4444] mb-2">
+                    <p className="text-4xl font-bold text-destructive mb-2">
                       {stats.usersByRole.ADMIN || 0}
                     </p>
-                    <p className="text-sm text-white/60">Administrators</p>
+                    <p className="text-sm text-muted-foreground">Administrators</p>
                   </div>
                 </div>
               </div>

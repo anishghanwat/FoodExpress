@@ -1,11 +1,11 @@
 export function Badge({ children, variant = 'default', className = '' }) {
   const variants = {
-    default: 'bg-white/10 text-white/70 border border-white/15',
-    success: 'bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30',
-    warning: 'bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30',
-    error: 'bg-[#EF4444]/20 text-[#EF4444] border border-[#EF4444]/30',
-    primary: 'bg-[#FF6B35]/20 text-[#FF6B35] border border-[#FF6B35]/30',
-    secondary: 'bg-[#1e3a5f]/40 text-blue-300 border border-blue-500/30'
+    default: 'bg-muted text-muted-foreground border border-border',
+    success: 'bg-success/20 text-success border border-success/30',
+    warning: 'bg-warning/20 text-warning border border-warning/30',
+    error: 'bg-destructive/20 text-destructive border border-destructive/30',
+    primary: 'bg-primary/20 text-primary border border-primary/30',
+    secondary: 'bg-secondary/40 text-secondary-foreground border border-secondary/30'
   };
 
   return (

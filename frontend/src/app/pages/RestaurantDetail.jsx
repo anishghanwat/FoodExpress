@@ -11,6 +11,7 @@ import restaurantService from '../services/restaurantService';
 import menuService from '../services/menuService';
 import { formatCurrency } from '../utils/helpers';
 import { toast } from 'sonner';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function RestaurantDetail() {
   const { id } = useParams();
@@ -91,7 +92,7 @@ export function RestaurantDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f]">
+      <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <LoadingSkeleton type="text" />
         </div>
@@ -101,9 +102,9 @@ export function RestaurantDetail() {
 
   if (!restaurant) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <p className="text-white/40 mb-4">Restaurant not found</p>
+          <p className="text-muted-foreground mb-4">Restaurant not found</p>
           <Button onClick={() => navigate('/restaurants')} variant="outline">Back to Restaurants</Button>
         </div>
       </div>
@@ -111,22 +112,23 @@ export function RestaurantDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
               onClick={() => navigate('/restaurants')}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
             >
               <ArrowLeft size={18} />
               Back
             </button>
 
-            <Link to="/" className="text-lg font-bold text-white hover:text-[#FF6B35] transition-colors">FoodExpress</Link>
+            <Link to="/" className="text-lg font-bold text-foreground hover:text-primary transition-colors">FoodExpress</Link>
 
             <div className="flex items-center gap-3">
+              <ThemeToggle />
               <Link to="/checkout">
                 <Button variant="outline" className="flex items-center gap-2 text-sm">
                   <ShoppingCart size={16} />
@@ -141,7 +143,7 @@ export function RestaurantDetail() {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* Restaurant Hero */}
       <div className="relative h-80 overflow-hidden">
@@ -191,8 +193,8 @@ export function RestaurantDetail() {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full whitespace-nowrap text-sm transition-all ${selectedCategory === category
-                  ? 'bg-[#FF6B35] text-white'
-                  : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted/50 border border-border text-muted-foreground hover:bg-accent hover:text-foreground'
                   }`}
               >
                 {category}
@@ -204,7 +206,7 @@ export function RestaurantDetail() {
         {/* Menu Items Grid */}
         {menuItems.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-white/40">No menu items available</p>
+            <p className="text-muted-foreground">No menu items available</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -217,7 +219,7 @@ export function RestaurantDetail() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="font-bold text-white mb-1">{item.name}</h3>
+                          <h3 className="font-bold text-card-foreground mb-1">{item.name}</h3>
                           {item.isVeg && (
                             <div className="inline-flex items-center gap-1 text-[#10B981] text-xs">
                               <Leaf size={12} />
@@ -226,10 +228,10 @@ export function RestaurantDetail() {
                           )}
                         </div>
                       </div>
-                      <p className="text-sm text-white/50 mb-3 line-clamp-2">
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                         {item.description}
                       </p>
-                      <p className="text-base font-bold text-[#FF6B35] mb-3">
+                      <p className="text-base font-bold text-primary mb-3">
                         {formatCurrency(item.price)}
                       </p>
 
@@ -247,7 +249,7 @@ export function RestaurantDetail() {
                           <Button size="sm" variant="outline" onClick={() => handleUpdateQuantity(item.id, -1)} className="px-2">
                             <Minus size={14} />
                           </Button>
-                          <span className="font-medium min-w-[2rem] text-center text-white">{quantity}</span>
+                          <span className="font-medium min-w-[2rem] text-center text-card-foreground">{quantity}</span>
                           <Button size="sm" onClick={() => handleUpdateQuantity(item.id, 1)} className="px-2">
                             <Plus size={14} />
                           </Button>
@@ -269,43 +271,45 @@ export function RestaurantDetail() {
       </div>
 
       {/* Sticky Cart Bar — Swiggy-style */}
-      {totalItems > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
-          <Link to="/checkout" className="pointer-events-auto block">
-            <div
-              className="max-w-2xl mx-auto bg-[#FF6B35] rounded-2xl shadow-2xl shadow-[#FF6B35]/30 flex items-center justify-between px-5 py-4 transition-all duration-300"
-              style={{ animation: 'slideUp 0.3s ease-out' }}
-            >
-              {/* Left: item count badge + restaurant */}
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center font-bold text-white text-sm">
-                  {totalItems}
-                </div>
-                <div>
-                  <div className="text-white font-semibold text-sm leading-tight">
-                    {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+      {
+        totalItems > 0 && (
+          <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
+            <Link to="/checkout" className="pointer-events-auto block">
+              <div
+                className="max-w-2xl mx-auto bg-primary text-primary-foreground rounded-2xl shadow-2xl shadow-primary/30 flex items-center justify-between px-5 py-4 transition-all duration-300"
+                style={{ animation: 'slideUp 0.3s ease-out' }}
+              >
+                {/* Left: item count badge + restaurant */}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-primary-foreground/20 rounded-xl flex items-center justify-center font-bold text-primary-foreground text-sm">
+                    {totalItems}
                   </div>
-                  <div className="text-white/70 text-xs">
-                    {restaurant?.name}
+                  <div>
+                    <div className="text-primary-foreground font-semibold text-sm leading-tight">
+                      {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                    </div>
+                    <div className="text-primary-foreground/70 text-xs">
+                      {restaurant?.name}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Right: total + arrow */}
-              <div className="flex items-center gap-3">
-                <div className="text-right">
-                  <div className="text-white font-bold text-base">{formatCurrency(totalCartPrice)}</div>
-                  <div className="text-white/70 text-xs">+ taxes</div>
-                </div>
-                <div className="flex items-center gap-1 text-white font-semibold text-sm">
-                  View Cart
-                  <ShoppingCart size={16} className="ml-1" />
+                {/* Right: total + arrow */}
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className="text-primary-foreground font-bold text-base">{formatCurrency(totalCartPrice)}</div>
+                    <div className="text-primary-foreground/70 text-xs">+ taxes</div>
+                  </div>
+                  <div className="flex items-center gap-1 text-primary-foreground font-semibold text-sm">
+                    View Cart
+                    <ShoppingCart size={16} className="ml-1" />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        </div>
-      )}
+            </Link>
+          </div>
+        )
+      }
 
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -321,6 +325,6 @@ export function RestaurantDetail() {
           to   { transform: translateY(0);    opacity: 1; }
         }
       `}</style>
-    </div>
+    </div >
   );
 }

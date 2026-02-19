@@ -9,6 +9,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card } from '../components/Card';
 import { toast } from 'sonner';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function Profile() {
     const { user, logout, updateUser } = useAuth();
@@ -74,25 +75,25 @@ export function Profile() {
     const dashboardLink = getRoleDashboardLink(user?.role);
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-background">
             {/* Header */}
-            <div className="bg-black/60 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+            <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
                 <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <button
                             onClick={() => navigate(-1)}
-                            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm"
+                            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                         >
                             <ArrowLeft size={18} />
                             Back
                         </button>
-                        <Link to="/" className="text-lg font-bold text-white hover:text-[#FF6B35] transition-colors">
+                        <Link to="/" className="text-lg font-bold text-foreground hover:text-primary transition-colors">
                             FoodExpress
                         </Link>
-                        <div className="w-16" />
+                        <div className="w-16 flex justify-end"><ThemeToggle /></div>
                     </div>
                 </div>
-            </div>
+            </nav>
 
             <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-5">
 
@@ -105,8 +106,8 @@ export function Profile() {
                                 {initials}
                             </div>
                             <div className="flex-1 min-w-0">
-                                <h1 className="text-xl font-bold text-white truncate">{user?.name || 'User'}</h1>
-                                <p className="text-white/50 text-sm truncate">{user?.email}</p>
+                                <h1 className="text-xl font-bold text-foreground truncate">{user?.name || 'User'}</h1>
+                                <p className="text-muted-foreground text-sm truncate">{user?.email}</p>
                                 <span className="inline-block mt-1.5 px-2.5 py-0.5 bg-[#FF6B35]/15 border border-[#FF6B35]/30 text-[#FF6B35] text-xs rounded-full font-medium">
                                     {getRoleLabel(user?.role)}
                                 </span>
@@ -114,7 +115,7 @@ export function Profile() {
                             {!editing && (
                                 <button
                                     onClick={() => setEditing(true)}
-                                    className="p-2 text-white/40 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
+                                    className="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors flex-shrink-0"
                                     title="Edit profile"
                                 >
                                     <Edit3 size={18} />
@@ -128,7 +129,7 @@ export function Profile() {
                 {editing && (
                     <Card>
                         <div className="p-6 space-y-4">
-                            <h2 className="text-base font-semibold text-white mb-4">Edit Profile</h2>
+                            <h2 className="text-base font-semibold text-foreground mb-4">Edit Profile</h2>
                             <Input
                                 label="Full Name"
                                 value={formData.name}
@@ -159,33 +160,33 @@ export function Profile() {
                 {/* Account Info */}
                 <Card>
                     <div className="p-5">
-                        <h2 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">Account</h2>
-                        <div className="space-y-0 divide-y divide-white/5">
+                        <h2 className="text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider mb-3">Account</h2>
+                        <div className="space-y-0 divide-y divide-border">
                             <div className="flex items-center gap-3 py-3">
-                                <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Mail size={15} className="text-white/50" />
+                                <div className="w-8 h-8 bg-muted/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Mail size={15} className="text-muted-foreground" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-xs text-white/40">Email</p>
-                                    <p className="text-sm text-white truncate">{user?.email || '—'}</p>
+                                    <p className="text-xs text-muted-foreground">Email</p>
+                                    <p className="text-sm text-foreground truncate">{user?.email || '—'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 py-3">
-                                <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Phone size={15} className="text-white/50" />
+                                <div className="w-8 h-8 bg-muted/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Phone size={15} className="text-muted-foreground" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-xs text-white/40">Phone</p>
-                                    <p className="text-sm text-white">{user?.phone || 'Not set'}</p>
+                                    <p className="text-xs text-muted-foreground">Phone</p>
+                                    <p className="text-sm text-foreground">{user?.phone || 'Not set'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 py-3">
-                                <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Shield size={15} className="text-white/50" />
+                                <div className="w-8 h-8 bg-muted/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Shield size={15} className="text-muted-foreground" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-xs text-white/40">Role</p>
-                                    <p className="text-sm text-white">{getRoleLabel(user?.role)}</p>
+                                    <p className="text-xs text-muted-foreground">Role</p>
+                                    <p className="text-sm text-foreground">{getRoleLabel(user?.role)}</p>
                                 </div>
                             </div>
                         </div>
@@ -195,29 +196,23 @@ export function Profile() {
                 {/* Quick Links */}
                 <Card>
                     <div className="p-5">
-                        <h2 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">Quick Links</h2>
-                        <div className="space-y-0 divide-y divide-white/5">
-                            <Link to="/orders/history" className="flex items-center gap-3 py-3 hover:bg-white/5 -mx-2 px-2 rounded-lg transition-colors">
-                                <div className="w-8 h-8 bg-[#FF6B35]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <ShoppingBag size={15} className="text-[#FF6B35]" />
+                        <h2 className="text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider mb-3">Quick Links</h2>
+                        <div className="space-y-0 divide-y divide-border">
+                            <Link to="/orders/history" className="flex items-center gap-3 py-3 hover:bg-accent -mx-2 px-2 rounded-lg transition-colors">
+                                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <ShoppingBag size={15} className="text-primary" />
                                 </div>
-                                <span className="flex-1 text-sm text-white">My Orders</span>
-                                <ChevronRight size={16} className="text-white/30" />
+                                <span className="flex-1 text-sm text-foreground">My Orders</span>
+                                <ChevronRight size={16} className="text-muted-foreground/50" />
                             </Link>
-                            <Link to="/notifications" className="flex items-center gap-3 py-3 hover:bg-white/5 -mx-2 px-2 rounded-lg transition-colors">
-                                <div className="w-8 h-8 bg-[#FF6B35]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Bell size={15} className="text-[#FF6B35]" />
-                                </div>
-                                <span className="flex-1 text-sm text-white">Notifications</span>
-                                <ChevronRight size={16} className="text-white/30" />
-                            </Link>
+
                             {dashboardLink && (
-                                <Link to={dashboardLink} className="flex items-center gap-3 py-3 hover:bg-white/5 -mx-2 px-2 rounded-lg transition-colors">
-                                    <div className="w-8 h-8 bg-[#FF6B35]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                        <User size={15} className="text-[#FF6B35]" />
+                                <Link to={dashboardLink} className="flex items-center gap-3 py-3 hover:bg-accent -mx-2 px-2 rounded-lg transition-colors">
+                                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <User size={15} className="text-primary" />
                                     </div>
-                                    <span className="flex-1 text-sm text-white">Dashboard</span>
-                                    <ChevronRight size={16} className="text-white/30" />
+                                    <span className="flex-1 text-sm text-foreground">Dashboard</span>
+                                    <ChevronRight size={16} className="text-muted-foreground/50" />
                                 </Link>
                             )}
                         </div>
@@ -227,13 +222,13 @@ export function Profile() {
                 {/* Logout */}
                 <button
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 border border-[#EF4444]/30 text-[#EF4444] rounded-xl hover:bg-[#EF4444]/10 transition-colors text-sm font-medium"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 border border-destructive/30 text-destructive rounded-xl hover:bg-destructive/10 transition-colors text-sm font-medium"
                 >
                     <LogOut size={16} />
                     Sign Out
                 </button>
 
-                <p className="text-center text-white/20 text-xs pb-4">FoodExpress · Member since {new Date().getFullYear()}</p>
+                <p className="text-center text-muted-foreground/40 text-xs pb-4">FoodExpress · Member since {new Date().getFullYear()}</p>
             </div>
         </div>
     );
