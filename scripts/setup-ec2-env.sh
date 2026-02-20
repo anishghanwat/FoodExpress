@@ -1,9 +1,27 @@
 #!/bin/bash
 
 # Get the public IP of the EC2 instance
-PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+# Try metadata service first
+PUBLIC_IP=$(curl -s --connect-timeout 2 http://169.254.169.254/latest/meta-data/public-ipv4)
+
+# If metadata service fails, try alternative methods
+if [ -z "$PUBLIC_IP" ]; then
+    echo "Metadata service unavailable, trying alternative method..."
+    PUBLIC_IP=$(curl -s ifconfig.me)
+fi
+
+# If still empty, try another service
+if [ -z "$PUBLIC_IP" ]; then
+    PUBLIC_IP=$(curl -s icanhazip.com)
+fi
 
 echo "Detected EC2 Public IP: $PUBLIC_IP"
+
+if [ -z "$PUBLIC_IP" ]; then
+    echo "❌ Error: Could not detect public IP address"
+    echo "Please run manually with: PUBLIC_IP=your_ip bash $0"
+    exit 1
+fi
 
 cd /home/ubuntu/FoodExpress
 
