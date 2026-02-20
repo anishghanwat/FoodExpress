@@ -1,6 +1,11 @@
 # Multi-stage build for React frontend
 FROM node:18-alpine AS build
 
+# Build arguments for environment variables
+ARG VITE_API_GATEWAY_URL
+ARG VITE_WS_URL
+ARG VITE_RAZORPAY_KEY_ID
+
 # Set working directory
 WORKDIR /app
 
@@ -13,7 +18,7 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application with environment variables
 RUN npm run build
 
 # Production stage with nginx

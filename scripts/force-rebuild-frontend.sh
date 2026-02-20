@@ -7,6 +7,9 @@ echo "Detected EC2 Public IP: $PUBLIC_IP"
 
 cd /home/ubuntu/FoodExpress
 
+# Setup environment variables
+bash scripts/setup-ec2-env.sh
+
 # Stop and remove frontend container
 echo "Stopping frontend container..."
 docker-compose -f docker-compose.prod.yml stop frontend
@@ -15,16 +18,6 @@ docker-compose -f docker-compose.prod.yml rm -f frontend
 # Remove frontend image to force rebuild
 echo "Removing old frontend image..."
 docker rmi foodexpress-frontend 2>/dev/null || true
-
-# Update frontend .env file
-echo "Updating frontend/.env..."
-cat > frontend/.env << EOF
-VITE_API_BASE_URL=http://${PUBLIC_IP}:8080
-VITE_WS_URL=ws://${PUBLIC_IP}:8080
-EOF
-
-echo "Frontend .env contents:"
-cat frontend/.env
 
 # Build and start frontend with no cache
 echo "Building frontend from scratch (no cache)..."
