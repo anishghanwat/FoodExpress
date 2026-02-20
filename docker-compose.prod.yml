@@ -261,6 +261,23 @@ services:
     networks:
       - foodexpress-network
 
+  # Kafka UI
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: foodexpress-kafka-ui
+    restart: unless-stopped
+    ports:
+      - "9090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: foodexpress
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - foodexpress-network
+
   # Frontend
   frontend:
     build:
