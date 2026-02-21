@@ -9,22 +9,24 @@ import lombok.Data;
 
 @Data
 public class RegisterRequest {
-    
+
     @NotBlank(message = "Name is required")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Name must contain only characters and spaces")
     private String name;
-    
+
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])[a-zA-Z0-9\\.]+@gmail\\.com$", message = "Email must contain at least one character and end with @gmail.com")
     private String email;
-    
+
     @NotBlank(message = "Phone is required")
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone must be 10 digits")
     private String phone;
-    
+
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters")
     private String password;
-    
+
     private UserRole role = UserRole.CUSTOMER;
 }
