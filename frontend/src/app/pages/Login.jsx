@@ -168,7 +168,7 @@ export function Login() {
               </p>
             </div>
 
-            <div className="mt-6 pt-5 border-t border-border">
+            {/* <div className="mt-6 pt-5 border-t border-border">
               <p className="text-xs text-muted-foreground text-center mb-3">Demo Credentials</p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {[
@@ -184,7 +184,7 @@ export function Login() {
                 ))}
               </div>
               <p className="text-xs text-center text-muted-foreground mt-2">Password: Password@123</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
