@@ -19,12 +19,14 @@ export const registerSchema = z.object({
         .string()
         .min(1, 'Name is required')
         .min(2, 'Name must be at least 2 characters')
-        .max(50, 'Name must be less than 50 characters'),
+        .max(50, 'Name must be less than 50 characters')
+        .regex(/^[a-zA-Z\s]+$/, 'Name must contain only characters and spaces'),
     email: z
         .string()
         .min(1, 'Email is required')
         .email('Invalid email address')
-        .regex(/@gmail\.com$/, 'Only @gmail.com emails are supported'),
+        .regex(/@gmail\.com$/, 'Only @gmail.com emails are supported')
+        .regex(/[a-zA-Z]/, 'Email must contain at least one letter'),
     phone: z
         .string()
         .min(1, 'Phone number is required')

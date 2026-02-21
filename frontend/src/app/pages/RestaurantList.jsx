@@ -175,7 +175,7 @@ export function RestaurantList() {
             </div>
             <Button
               variant="outline"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 lg:hidden"
               onClick={() => setShowFilters(!showFilters)}
             >
               <SlidersHorizontal size={16} />
